@@ -4,6 +4,12 @@ using Algebra.Operators;
 
 namespace Algebra.Rings;
 
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <typeparam name="TAddOperator"></typeparam>
+/// <typeparam name="TMultiplyOperator"></typeparam>
 public interface IField<T, TAddOperator, TMultiplyOperator>
     : IRing<T, TAddOperator, TMultiplyOperator>
     where T : 
