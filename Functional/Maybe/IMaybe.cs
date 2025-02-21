@@ -9,8 +9,9 @@ namespace Functional.Maybe;
 /// <summary>
 /// 
 /// </summary>
-public interface IMaybe
-    : IMonad<IMaybe>, ITraversable<IMaybe>
+public interface IMaybe : 
+    IMonad<IMaybe>, 
+    ITraversable<IMaybe>
 {
     /// <summary>
     /// 
