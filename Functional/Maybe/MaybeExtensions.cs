@@ -13,8 +13,9 @@ public static class MaybeExtensions
     /// <param name="maybe"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static IMaybe<T> Coerce<T>(
+    public static IMaybe<T> ToMaybe<T>(
         this ITypeConstructor<IMaybe, T> maybe)
+        where T : notnull
         => (IMaybe<T>) maybe; 
     
     /// <summary>
@@ -24,6 +25,7 @@ public static class MaybeExtensions
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static IMaybe<T> ToMaybe<T>(this T value)
+        where T : notnull
         => Maybe.Of(value);
 
     /// <summary>
@@ -36,6 +38,7 @@ public static class MaybeExtensions
     public static IMaybe<T> OrElse<T>(
         this IMaybe<T> maybe,
         Func<IMaybe<T>> f)
+        where T : notnull
         => maybe switch
         {
             IJust<T> just =>
@@ -55,6 +58,7 @@ public static class MaybeExtensions
     public static IMaybe<T> OrElse<T>(
         this IMaybe<T> maybe,
         IMaybe<T> other)
+        where T : notnull
         => maybe.OrElse(
             () => other);
     
@@ -68,6 +72,7 @@ public static class MaybeExtensions
     public static T OrElse<T>(
         this IMaybe<T> maybe,
         Func<T> f)
+        where T : notnull
         => maybe switch
         {
             IJust<T> just =>
@@ -86,6 +91,7 @@ public static class MaybeExtensions
     public static T OrElse<T>(
         this IMaybe<T> maybe,
         T other)
+        where T : notnull
         => maybe.OrElse(
             () => other);
 }

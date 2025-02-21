@@ -5,4 +5,5 @@ namespace Functional.Maybe;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public interface INothing<out T> 
-    : IMaybe<T>;
+    : IMaybe<T>
+    where T : notnull;

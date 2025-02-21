@@ -11,6 +11,7 @@ public static class Maybe
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static IMaybe<T> Nothing<T>()
+        where T : notnull
         => new Nothing<T>();
     
     /// <summary>
@@ -20,5 +21,6 @@ public static class Maybe
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     public static IMaybe<T> Of<T>(T value)
+        where T : notnull
         => new Just<T>(value);
 }

@@ -5,4 +5,5 @@ namespace Functional.Maybe;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public sealed record Nothing<T> 
-    : INothing<T>; 
+    : INothing<T>
+    where T : notnull;

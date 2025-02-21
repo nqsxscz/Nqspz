@@ -6,6 +6,7 @@ namespace Functional.Maybe;
 /// <typeparam name="T"></typeparam>
 public interface IJust<out T> 
     : IMaybe<T>
+    where T : notnull
 {
     /// <summary>
     /// 
