@@ -5,4 +5,4 @@ namespace Functional.HigherKindedTypes;
 /// </summary>
 /// <typeparam name="TC"></typeparam>
 /// <typeparam name="T"></typeparam>
-public interface ITypeConstructor<TC, T>;
+public interface ITypeConstructor<TC, out T>;
