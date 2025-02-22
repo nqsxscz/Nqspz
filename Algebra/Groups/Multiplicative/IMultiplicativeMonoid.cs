@@ -6,19 +6,18 @@ namespace Algebra.Groups.Multiplicative;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TOperator"></typeparam>
-public interface IMultiplicativeMonoid<T, TOperator> 
-    : IMultiplicativeSemigroup<T, TOperator>, IMonoid<T, TOperator>
-    where T : IMultiplicativeMonoid<T, TOperator>
-    where TOperator : IMultiplyBinaryOperator
+public interface IMultiplicativeMonoid<T> 
+    : IMultiplicativeSemigroup<T>, IMonoid<T, IMultiplyBinaryOperator>
+    where T : IMultiplicativeMonoid<T>
 {
     /// <summary>
     /// 
     /// </summary>
-    static abstract T MultiplicativeIdentity { get; }
+    static abstract T One { get; }
     
     /// <summary>
     /// 
     /// </summary>
-    static T IMonoid<T, TOperator>.Identity => T.MultiplicativeIdentity;
+    static T IMonoid<T, IMultiplyBinaryOperator>.Identity 
+        => T.One;
 }

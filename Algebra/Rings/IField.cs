@@ -1,6 +1,5 @@
 using Algebra.Groups.Additive;
 using Algebra.Groups.Multiplicative;
-using Algebra.Operators;
 
 namespace Algebra.Rings;
 
@@ -8,13 +7,9 @@ namespace Algebra.Rings;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TAddOperator"></typeparam>
-/// <typeparam name="TMultiplyOperator"></typeparam>
-public interface IField<T, TAddOperator, TMultiplyOperator>
-    : IRing<T, TAddOperator, TMultiplyOperator>
+public interface IField<T>
+    : IRing<T>
     where T : 
-        IField<T, TAddOperator, TMultiplyOperator>, 
-        IAdditiveGroup<T, TAddOperator>, 
-        IMultiplicativeGroup<T, TMultiplyOperator>
-    where TAddOperator : IAddBinaryOperator
-    where TMultiplyOperator : IMultiplyBinaryOperator;
+        IField<T>, 
+        IAdditiveGroup<T>, 
+        IMultiplicativeGroup<T>;

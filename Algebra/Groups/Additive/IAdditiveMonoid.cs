@@ -6,19 +6,17 @@ namespace Algebra.Groups.Additive;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TOperator"></typeparam>
-public interface IAdditiveMonoid<T, TOperator> 
-    : IAdditiveSemigroup<T, TOperator>, IMonoid<T, TOperator>
-    where T : IAdditiveMonoid<T, TOperator>
-    where TOperator : IAddBinaryOperator
+public interface IAdditiveMonoid<T> 
+    : IAdditiveSemigroup<T>, IMonoid<T, IAddBinaryOperator>
+    where T : IAdditiveMonoid<T>
 {
     /// <summary>
     /// 
     /// </summary>
-    static abstract T AdditiveIdentity { get; }
+    static abstract T Zero { get; }
     
     /// <summary>
     /// 
     /// </summary>
-    static T IMonoid<T, TOperator>.Identity => T.AdditiveIdentity;
+    static T IMonoid<T, IAddBinaryOperator>.Identity => T.Zero;
 }

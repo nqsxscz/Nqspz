@@ -6,8 +6,6 @@ namespace Algebra.Groups.Additive;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TOperator"></typeparam>
-public interface IAdditiveGroup<T, TOperator> 
-    : IAdditiveMonoid<T, TOperator>, IGroup<T, TOperator>
-    where T : IAdditiveGroup<T, TOperator>
-    where TOperator : IAddBinaryOperator;
+public interface IAdditiveGroup<T> 
+    : IAdditiveMonoid<T>, IGroup<T, IAddBinaryOperator>
+    where T : IAdditiveGroup<T>;

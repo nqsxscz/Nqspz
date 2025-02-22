@@ -6,11 +6,9 @@ namespace Algebra.Groups.Additive;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TOperator"></typeparam>
-public interface IAdditiveSemigroup<T, TOperator>
-    : ISemigroup<T, TOperator>
-    where T : IAdditiveSemigroup<T, TOperator>
-    where TOperator : IAddBinaryOperator
+public interface IAdditiveSemigroup<T>
+    : ISemigroup<T, IAddBinaryOperator>
+    where T : IAdditiveSemigroup<T>
 {
     /// <summary>
     /// 
@@ -18,7 +16,7 @@ public interface IAdditiveSemigroup<T, TOperator>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    static abstract T Add(T left, T right);
+    static abstract T operator +(T left, T right);
     
     /// <summary>
     /// 
@@ -26,6 +24,6 @@ public interface IAdditiveSemigroup<T, TOperator>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    static T ISemigroup<T, TOperator>.Combine(T left, T right) 
-        => T.Add(left, right);
+    static T ISemigroup<T, IAddBinaryOperator>.Combine(T left, T right) 
+        => left + right;
 }

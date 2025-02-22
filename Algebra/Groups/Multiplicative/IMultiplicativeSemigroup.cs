@@ -6,11 +6,9 @@ namespace Algebra.Groups.Multiplicative;
 /// 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-/// <typeparam name="TOperator"></typeparam>
-public interface IMultiplicativeSemigroup<T, TOperator>
-    : ISemigroup<T, TOperator>
-    where T : IMultiplicativeSemigroup<T, TOperator>
-    where TOperator : IMultiplyBinaryOperator
+public interface IMultiplicativeSemigroup<T>
+    : ISemigroup<T, IMultiplyBinaryOperator>
+    where T : IMultiplicativeSemigroup<T>
 {
     /// <summary>
     /// 
@@ -18,7 +16,7 @@ public interface IMultiplicativeSemigroup<T, TOperator>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    static abstract T Multiply(T left, T right);
+    static abstract T operator *(T left, T right);
     
     /// <summary>
     /// 
@@ -26,6 +24,6 @@ public interface IMultiplicativeSemigroup<T, TOperator>
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    static T ISemigroup<T, TOperator>.Combine(T left, T right) 
-        => T.Multiply(left, right);
+    static T ISemigroup<T, IMultiplyBinaryOperator>.Combine(T left, T right) 
+        => left * right;
 }

@@ -1,6 +1,5 @@
 using Algebra.Groups.Additive;
 using Algebra.Groups.Multiplicative;
-using Algebra.Operators;
 
 namespace Algebra.Rings;
 
@@ -15,20 +14,16 @@ public static class Semiring
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TAddOperator"></typeparam>
-    /// <typeparam name="TMultiplyOperator"></typeparam>
     /// <returns></returns>
-    public static T Multiply<T, TAddOperator, TMultiplyOperator>(this T left, T right)
+    public static T Multiply<T>(this T left, T right)
         where T :
-        ISemiring<T, TAddOperator, TMultiplyOperator>,
-        IAdditiveMonoid<T, TAddOperator>,
-        IMultiplicativeMonoid<T, TMultiplyOperator>
-        where TAddOperator : IAddBinaryOperator
-        where TMultiplyOperator : IMultiplyBinaryOperator
+        ISemiring<T>,
+        IAdditiveMonoid<T>,
+        IMultiplicativeMonoid<T>
     {
         // The additive identity is a left and right annihilator for multiplication
-        if (left.Equals(T.AdditiveIdentity) || right.Equals(T.AdditiveIdentity))
-            return T.AdditiveIdentity;
-        return T.Multiply(left, right);
+        if (left.Equals(T.Zero) || right.Equals(T.Zero))
+            return T.Zero;
+        return left * right;
     }
 }
