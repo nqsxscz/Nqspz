@@ -188,28 +188,10 @@ public static class FoldableExtensions
     public static T Sum<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : INumber<T>
+        where T : IAdditiveMonoid<T>
         => input.AggregateRight(
             T.Zero, 
-            (t1, t2) 
-                => t1 + t2);
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <typeparam name="TC"></typeparam>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TAddOperator"></typeparam>
-    /// <returns></returns>
-    public static T Sum<TC, T, TAddOperator>(
-        this ITypeConstructor<TC, T> input)
-        where TC : IFoldable<TC>
-        where T : IAdditiveMonoid<T, TAddOperator>
-        where TAddOperator : IAddBinaryOperator
-        => input.AggregateRight(
-            T.AdditiveIdentity, 
-            T.Add);
+            AdditiveSemigroup.Add);
     
     /// <summary>
     /// 
@@ -221,26 +203,8 @@ public static class FoldableExtensions
     public static T Product<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : INumber<T>
+        where T : IMultiplicativeMonoid<T>
         => input.AggregateRight(
             T.One, 
-            (t1, t2) 
-                => t1 * t2);
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="input"></param>
-    /// <typeparam name="TC"></typeparam>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="TMultiplyOperator"></typeparam>
-    /// <returns></returns>
-    public static T Product<TC, T, TMultiplyOperator>(
-        this ITypeConstructor<TC, T> input)
-        where TC : IFoldable<TC>
-        where T : IMultiplicativeMonoid<T, TMultiplyOperator>
-        where TMultiplyOperator : IMultiplyBinaryOperator
-        => input.AggregateRight(
-            T.MultiplicativeIdentity, 
-            T.Multiply);
+            MultiplicativeSemigroup.Multiply);
 }
