@@ -1,13 +1,14 @@
-using Lofi.Lang.Random.Sequence.Operator;
+using Lofi.Lang.Random.Sequence.Instance.Operator;
 
 namespace Lofi.Lang.Random.Sequence.Instance;
 
 // ReSharper disable once UnusedTypeParameter
-public interface IBinaryOperationStoppingSequence<out TOperator>
+public interface IBinaryOperationStoppingSequence
     : IStoppingSequence
-    where TOperator : IBinaryOperator
 {
     IStoppingSequence Left { get; }
 
     IStoppingSequence Right { get; }
+    
+    IOperator Operator { get; }
 }

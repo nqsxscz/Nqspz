@@ -1,9 +1,9 @@
-using Lofi.Lang.Random.Sequence.Operator;
+using Lofi.Lang.Random.Sequence.Instance.Operator;
 
 namespace Lofi.Lang.Random.Sequence.Instance.Implementation;
 
-internal sealed record BinaryOperationStoppingSequence<TOperator>(
+internal sealed record BinaryOperationStoppingSequence(
     IStoppingSequence Left,
-    IStoppingSequence Right)
-    : IBinaryOperationStoppingSequence<TOperator>
-    where TOperator : IBinaryOperator;
+    IStoppingSequence Right,
+    IOperator Operator)
+    : IBinaryOperationStoppingSequence;

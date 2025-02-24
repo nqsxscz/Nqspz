@@ -1,5 +1,5 @@
 using Lofi.Lang.Random.Sequence.Instance;
-using Lofi.Lang.Random.Sequence.Operator;
+using Lofi.Lang.Random.Sequence.Instance.Operator;
 using Lofi.Lang.Random.Time;
 using Lofi.Prelude.Control;
 using Lofi.Prelude.Data;
@@ -14,38 +14,43 @@ public static partial class StoppingSequence
             DateTime t)
         => sequence switch
         {
-            IBinaryOperationStoppingSequence<IAfterBinaryOperator>
+            IBinaryOperationStoppingSequence
                 {
                     Left: var left,
-                    Right: var right
+                    Right: var right,
+                    Operator: AfterOperator
                 } =>
                 left.OccurrencesAfter(right, t),
-            IBinaryOperationStoppingSequence<IBeforeBinaryOperator>
+            IBinaryOperationStoppingSequence
                 {
                     Left: var left,
-                    Right: var right
+                    Right: var right,
+                    Operator: BeforeOperator
                 } =>
                 left.OccurrencesBefore(right, t),
-            IBinaryOperationStoppingSequence<IExceptBinaryOperator>
+            IBinaryOperationStoppingSequence
                 {
                     Left: var left,
-                    Right: var right
+                    Right: var right,
+                    Operator: ExceptOperator
                 } =>
                 left.Occurrences(t)
                     .Except(right.Occurrences(t))
                     .Order(),
-            IBinaryOperationStoppingSequence<IIntersectBinaryOperator>
+            IBinaryOperationStoppingSequence
                 {
                     Left: var left,
-                    Right: var right
+                    Right: var right,
+                    Operator: IntersectOperator
                 } =>
                 left.Occurrences(t)
                     .Intersect(right.Occurrences(t))
                     .Order(),
-            IBinaryOperationStoppingSequence<IUnionBinaryOperator>
+            IBinaryOperationStoppingSequence
                 {
                     Left: var left,
-                    Right: var right
+                    Right: var right,
+                    Operator: UnionOperator
                 } =>
                 left.Occurrences(t)
                     .Union(right.Occurrences(t))
