@@ -110,7 +110,7 @@ public static class Foldable
         where T : IAdditiveMonoid<T>
         => input.AggregateRight(
             T.Zero,
-            AdditiveSemigroup.Add);
+            Semigroup.Add);
 
     public static T Product<TC, T>(
         this ITypeConstructor<TC, T> input)
@@ -118,5 +118,5 @@ public static class Foldable
         where T : IMultiplicativeMonoid<T>
         => input.AggregateRight(
             T.One,
-            MultiplicativeSemigroup.Multiply);
+            Semigroup.Multiply);
 }
