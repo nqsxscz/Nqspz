@@ -1,5 +1,3 @@
-using System.Numerics;
-
 using Lofi.Prelude.Algebra;
 using Lofi.Prelude.Algebra.Trait;
 using Lofi.Prelude.Algebra.Trait.Additive;
@@ -86,23 +84,21 @@ public static class Foldable
             false,
             (t, found) => found || t.Equals(item));
 
-    public static T Min<TC, T>(
+    public static T Minimum<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : notnull, IMinMaxValue<T>, IComparable<T>
+        where T : notnull, IBottomable<T>, IOrderable<T>
         => input.AggregateRight(
-            T.MinValue,
-            (t, min) =>
-                t.CompareTo(min) < 0 ? t : min);
+            T.Bottom,
+            T.Minimum);
 
-    public static T Max<TC, T>(
+    public static T Maximum<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : notnull, IMinMaxValue<T>, IComparable<T>
+        where T : notnull, IToppable<T>, IOrderable<T>
         => input.AggregateRight(
-            T.MaxValue,
-            (t, max) =>
-                t.CompareTo(max) > 0 ? t : max);
+            T.Top,
+            T.Maximum);
 
     public static T Sum<TC, T>(
         this ITypeConstructor<TC, T> input)
