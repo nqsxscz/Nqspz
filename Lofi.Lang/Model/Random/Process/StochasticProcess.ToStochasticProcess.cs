@@ -1,4 +1,3 @@
-using Lofi.Lang.Model.Random.Process.Instance;
 using Lofi.Lang.Model.Random.Process.Instance.Type;
 using Lofi.Lang.Model.Random.Process.Instance.TypeConstructor;
 using Lofi.Prelude.Type;

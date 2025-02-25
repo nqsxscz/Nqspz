@@ -1,4 +1,3 @@
-using Lofi.Lang.Model.Random.Variable.Instance;
 using Lofi.Lang.Model.Random.Variable.Instance.Type;
 
 namespace Lofi.Lang.Model.Random.Variable;
