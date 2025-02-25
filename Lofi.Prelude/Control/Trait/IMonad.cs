@@ -6,7 +6,7 @@ public interface IMonad<TC>
     : IApplicative<TC>
     where TC : IMonad<TC>
 {
-    static abstract ITypeConstructor<TC, T> MReturn<T>(T t)
+    static abstract ITypeConstructor<TC, T> Return<T>(T t)
         where T : notnull;
 
     static abstract ITypeConstructor<TC, T2> SelectMany<T1, T2>(
@@ -19,10 +19,10 @@ public interface IMonad<TC>
         ITypeConstructor<TC, T1> input,
         Func<T1, T2> selector)
         => input.SelectMany(
-            t1 => TC.MReturn(selector(t1)));
+            t1 => TC.Return(selector(t1)));
 
     static ITypeConstructor<TC, T> IApplicative<TC>.Pure<T>(T t)
-        => TC.MReturn(t);
+        => TC.Return(t);
 
     static ITypeConstructor<TC, T3> IApplicative<TC>.Lift<T1, T2, T3>(
         ITypeConstructor<TC, T1> left,

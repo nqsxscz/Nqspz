@@ -9,7 +9,7 @@ public interface ISeq :
     ITraversable<ISeq>
 {
     static ITypeConstructor<ISeq, T>
-        IMonad<ISeq>.MReturn<T>(T item)
+        IMonad<ISeq>.Return<T>(T item)
         => Data.Seq.Of(item);
 
     static ITypeConstructor<ISeq, T2>

@@ -10,7 +10,7 @@ public interface IMaybe :
     ITraversable<IMaybe>
 {
     static ITypeConstructor<IMaybe, T>
-        IMonad<IMaybe>.MReturn<T>(T t)
+        IMonad<IMaybe>.Return<T>(T t)
         => Data.Maybe.Nothing<T>();
 
     static ITypeConstructor<IMaybe, T2>
