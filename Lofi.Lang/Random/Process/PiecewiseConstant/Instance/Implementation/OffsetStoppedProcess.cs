@@ -1,3 +1,5 @@
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
+
 namespace Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Implementation;
 
 internal sealed record OffsetStoppedProcess<T>(

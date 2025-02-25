@@ -6,7 +6,5 @@ public static class MultiplicativeSemigroup
 {
     public static T Multiply<T>(T left, T right)
         where T : notnull, IMultiplicativeSemigroup<T>
-    {
-        return left * right;
-    }
+        => left * right;
 }

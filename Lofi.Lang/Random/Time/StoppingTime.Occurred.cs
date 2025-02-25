@@ -1,4 +1,4 @@
-using Lofi.Lang.Random.Time.Instance;
+using Lofi.Lang.Random.Time.Instance.Type;
 using Lofi.Prelude.Data;
 
 namespace Lofi.Lang.Random.Time;

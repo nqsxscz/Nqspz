@@ -1,3 +1,4 @@
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
 using Lofi.Supplier;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Implementation;

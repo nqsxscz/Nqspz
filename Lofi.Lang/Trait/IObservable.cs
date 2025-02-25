@@ -1,4 +1,4 @@
-using Lofi.Prelude.Data.Instance.Maybe;
+using Lofi.Prelude.Data.Instance.Maybe.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Trait;

@@ -1,5 +1,5 @@
-using Lofi.Lang.Random.Time.Instance;
 using Lofi.Lang.Random.Time.Instance.Implementation;
+using Lofi.Lang.Random.Time.Instance.Type;
 
 namespace Lofi.Lang.Random.Time;
 

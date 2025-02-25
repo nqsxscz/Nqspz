@@ -1,5 +1,5 @@
-using Lofi.Lang.Random.Sequence.Instance;
 using Lofi.Lang.Random.Sequence.Instance.Operator;
+using Lofi.Lang.Random.Sequence.Instance.Type;
 using Lofi.Lang.Random.Time;
 using Lofi.Prelude.Control;
 using Lofi.Prelude.Data;

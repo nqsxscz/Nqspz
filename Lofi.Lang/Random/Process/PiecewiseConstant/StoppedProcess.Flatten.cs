@@ -1,5 +1,5 @@
-using Lofi.Lang.Random.Process.PiecewiseConstant.Instance;
-using Lofi.Prelude.Data.Instance.Maybe;
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
+using Lofi.Prelude.Data.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant;
 

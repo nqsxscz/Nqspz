@@ -1,6 +1,6 @@
 using Lofi.Lang.Random.Process.Continuous;
-using Lofi.Lang.Random.Process.PiecewiseConstant.Instance;
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Implementation;
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
 using Lofi.Lang.Random.Sequence;
 using Lofi.Supplier;
 

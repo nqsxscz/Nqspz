@@ -1,4 +1,5 @@
-using Lofi.Lang.Random.Process.PiecewiseConstant.Instance;
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
+using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.TypeConstructor;
 using Lofi.Prelude.Type;
 using Lofi.Supplier;
 

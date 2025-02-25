@@ -1,6 +1,6 @@
-using Lofi.Lang.Random.Process.Continuous.Instance;
 using Lofi.Lang.Random.Process.Continuous.Instance.Implementation;
-using Lofi.Prelude.Data.Instance.Maybe;
+using Lofi.Lang.Random.Process.Continuous.Instance.Type;
+using Lofi.Prelude.Data.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Random.Process.Continuous;
 

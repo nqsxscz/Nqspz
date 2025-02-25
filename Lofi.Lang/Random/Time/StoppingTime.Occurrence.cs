@@ -1,8 +1,8 @@
 using Lofi.Lang.Random.Sequence;
-using Lofi.Lang.Random.Time.Instance;
+using Lofi.Lang.Random.Time.Instance.Type;
 using Lofi.Prelude.Control;
 using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe;
+using Lofi.Prelude.Data.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Random.Time;
 

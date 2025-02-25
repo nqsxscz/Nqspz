@@ -5,10 +5,8 @@ public interface IAdditiveGroup<T> :
     IGroup<T>
     where T : notnull, IAdditiveGroup<T>
 {
-    static T IGroup<T>.Invert(T operand)
-    {
-        return -operand;
-    }
-
     static abstract T operator -(T operand);
+    
+    static T IGroup<T>.Invert(T operand)
+        => -operand;
 }

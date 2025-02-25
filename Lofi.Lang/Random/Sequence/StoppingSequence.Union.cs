@@ -1,5 +1,5 @@
-using Lofi.Lang.Random.Sequence.Instance;
 using Lofi.Lang.Random.Sequence.Instance.Implementation;
+using Lofi.Lang.Random.Sequence.Instance.Type;
 
 namespace Lofi.Lang.Random.Sequence;
 
