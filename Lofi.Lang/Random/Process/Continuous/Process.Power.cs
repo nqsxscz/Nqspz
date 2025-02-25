@@ -1,6 +1,7 @@
 using Lofi.Lang.Random.Process.Continuous.Instance.Type;
 using Lofi.Prelude.Algebra;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
+using Lofi.Prelude.Numeric;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Random.Process.Continuous;
@@ -24,5 +25,5 @@ public static partial class Process
         => Lift(
             left, 
             right, 
-            T.Power);
+            Real.Power);
 }

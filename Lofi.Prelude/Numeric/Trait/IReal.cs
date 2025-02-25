@@ -61,7 +61,7 @@ public interface IReal<T> :
     static virtual T Atanh(T t)
         => Lift(t, double.Atanh);
     
-    static virtual T Power(
+    static virtual T operator ^(
         T left, 
         T right)
         => Lift(

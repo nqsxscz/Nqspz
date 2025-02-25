@@ -2,6 +2,7 @@ using Lofi.Lang.Random.Process.Continuous.Instance.Type;
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
 using Lofi.Prelude.Algebra;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
+using Lofi.Prelude.Numeric;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant;
@@ -45,7 +46,7 @@ public static partial class StoppedProcess
         => Lift(
             left, 
             right, 
-            T.Power);
+            Real.Power);
     
     public static IStoppedProcess<T> Power<T>(
         this IStoppedProcess<T> left,
@@ -54,7 +55,7 @@ public static partial class StoppedProcess
         => Lift(
             left, 
             right, 
-            T.Power);
+            Real.Power);
     
     public static IStoppedProcess<T> Power<T>(
         this IProcess<T> left,
@@ -63,5 +64,5 @@ public static partial class StoppedProcess
         => Lift(
             left, 
             right, 
-            T.Power);
+            Real.Power);
 }

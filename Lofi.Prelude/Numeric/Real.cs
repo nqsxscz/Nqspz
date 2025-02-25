@@ -84,7 +84,5 @@ public static class Real
         this T left, 
         T right)
         where T : IReal<T>
-        => T.Power(
-            left, 
-            right);
+        => left ^ right;
 }
