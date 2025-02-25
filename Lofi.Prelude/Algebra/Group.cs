@@ -14,7 +14,15 @@ public static class Group
     public static T Negate<T>(this T value)
         where T : IAdditiveGroup<T>
         => -value;
-    
+
+    public static T Abs<T>(this T value)
+        where T :
+        IAdditiveGroup<T>,
+        IOrderable<T>
+        => T.Maximum(
+            value, 
+            -value);
+
     public static T Subtract<T>(this T left, T right)
         where T : IAdditiveGroup<T>
         => left - right;
