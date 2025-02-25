@@ -1,31 +1,28 @@
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
-using Lofi.Lang.Random.Sequence;
+using Lofi.Prelude.Algebra.Trait;
 using Lofi.Prelude.Data;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant;
 
 public static partial class StoppedProcess
 {
-    public static IStoppedProcess<T2> ScanLeft<T1, T2>(
-        this IStoppedProcess<T1> operand,
-        T2 init,
-        Func<T2, T1, T2> accumulator)
-        where T1 : notnull
-        where T2 : notnull
+    public static IStoppedProcess<T> Scan<T>(
+        this IStoppedProcess<T> operand)
+        where T : IMonoid<T>
         => operand
-            .Time()
-            .Select(t =>
-                operand
-                    .StoppingSequence
-                    .Occurrences(t)
-                    .Aggregate(
-                        init.ToMaybe(),
-                        (x, s) =>
-                            Maybe.Lift(accumulator)(
-                                x,
-                                operand.Observe(s))))
-            .Flatten();
+            .Scan(
+                T.Identity, 
+                T.Combine);
 
+    public static IStoppedProcess<T> Scan<T>(
+        this IStoppedProcess<T> operand,
+        T init,
+        Func<T, T, T> accumulator)
+        where T : notnull
+        => operand
+            .ScanLeft(
+                init, 
+                accumulator);
     public static IStoppedProcess<T2> ScanRight<T1, T2>(
         this IStoppedProcess<T1> operand,
         T2 init,
@@ -36,4 +33,19 @@ public static partial class StoppedProcess
             .ScanLeft(
                 init,
                 accumulator.Flip());
+    
+    public static IStoppedProcess<T2> ScanLeft<T1, T2>(
+        this IStoppedProcess<T1> operand,
+        T2 init,
+        Func<T2, T1, T2> accumulator)
+        where T1 : notnull
+        where T2 : notnull
+        => operand
+            .Time()
+            .Select(
+                operand
+                    .AggregateLeft(
+                        init, 
+                        accumulator))
+            .Flatten();
 }
