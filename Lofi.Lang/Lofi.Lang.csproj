@@ -11,8 +11,4 @@
         <ProjectReference Include="..\Lofi.Supplier\Lofi.Supplier.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Random\"/>
-    </ItemGroup>
-
 </Project>
