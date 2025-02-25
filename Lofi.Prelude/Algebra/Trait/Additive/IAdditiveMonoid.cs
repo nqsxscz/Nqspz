@@ -3,7 +3,7 @@ namespace Lofi.Prelude.Algebra.Trait.Additive;
 public interface IAdditiveMonoid<T> :
     IAdditiveSemigroup<T>,
     IMonoid<T>
-    where T : notnull, IAdditiveMonoid<T>
+    where T : IAdditiveMonoid<T>
 {
     static abstract T Zero { get; }
 

@@ -3,7 +3,7 @@ using Lofi.Prelude.Type;
 namespace Lofi.Prelude.Control.Trait;
 
 public interface IFoldable<TC>
-    where TC : IFoldable<TC>
+    where TC : notnull, IFoldable<TC>
 {
     static abstract T2 AggregateRight<T1, T2>(
         ITypeConstructor<TC, T1> input,

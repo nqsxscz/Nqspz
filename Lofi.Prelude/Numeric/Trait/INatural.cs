@@ -8,7 +8,7 @@ public interface INatural<T> :
     IAdditiveGroup<T>,
     IMultiplicativeGroup<T>,
     IOrderable<T>
-    where T : notnull, INatural<T>
+    where T : INatural<T>
 {
     static abstract int ToInt(T t);
     

@@ -87,7 +87,10 @@ public static class Foldable
     public static T Minimum<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : notnull, IBottomable<T>, IOrderable<T>
+        where T : 
+            notnull, 
+            IBottomable<T>, 
+            IOrderable<T>
         => input.AggregateRight(
             T.Bottom,
             T.Minimum);
@@ -95,7 +98,10 @@ public static class Foldable
     public static T Maximum<TC, T>(
         this ITypeConstructor<TC, T> input)
         where TC : IFoldable<TC>
-        where T : notnull, IToppable<T>, IOrderable<T>
+        where T : 
+            notnull, 
+            IToppable<T>, 
+            IOrderable<T>
         => input.AggregateRight(
             T.Top,
             T.Maximum);

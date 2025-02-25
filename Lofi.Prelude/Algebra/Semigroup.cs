@@ -6,15 +6,15 @@ namespace Lofi.Prelude.Algebra;
 
 public static class Semigroup
 {
-    public static T Combine<T>(T left, T right)
-        where T : notnull, ISemigroup<T>
+    public static T Combine<T>(this T left, T right)
+        where T : ISemigroup<T>
         => T.Combine(left, right);
     
-    public static T Add<T>(T left, T right)
-        where T : notnull, IAdditiveSemigroup<T>
+    public static T Add<T>(this T left, T right)
+        where T : IAdditiveSemigroup<T>
         => left + right;
     
-    public static T Multiply<T>(T left, T right)
-        where T : notnull, IMultiplicativeSemigroup<T>
+    public static T Multiply<T>(this T left, T right)
+        where T : IMultiplicativeSemigroup<T>
         => left * right;
 }

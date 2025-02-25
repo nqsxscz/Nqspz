@@ -2,7 +2,7 @@ namespace Lofi.Prelude.Numeric.Trait;
 
 public interface IReal<T> : 
     INatural<T>
-    where T : notnull, IReal<T>
+    where T : IReal<T>
 {
     static abstract double ToDouble(T t);
     

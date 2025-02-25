@@ -3,7 +3,7 @@ using Lofi.Prelude.Type;
 namespace Lofi.Prelude.Control.Trait;
 
 public interface IContravariant<TC>
-    where TC : IContravariant<TC>
+    where TC : notnull, IContravariant<TC>
 {
     static abstract ITypeConstructor<TC, T1>
         ContraSelect<T1, T2>(

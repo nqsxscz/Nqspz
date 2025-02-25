@@ -8,19 +8,19 @@ namespace Lofi.Prelude.Algebra;
 public static class Group
 {
     public static T Invert<T>(this T value)
-        where T : notnull, IGroup<T>
+        where T : IGroup<T>
         => T.Invert(value);
     
     public static T Negate<T>(this T value)
-        where T : notnull, IAdditiveGroup<T>
+        where T : IAdditiveGroup<T>
         => -value;
     
     public static T Subtract<T>(this T left, T right)
-        where T : notnull, IAdditiveGroup<T>
+        where T : IAdditiveGroup<T>
         => left - right;
     
     public static T Divide<T>(this T left, T right)
-        where T : notnull, IMultiplicativeGroup<T>
+        where T : IMultiplicativeGroup<T>
         => left / right;
 
     public static T Power<T, TNatural>(
