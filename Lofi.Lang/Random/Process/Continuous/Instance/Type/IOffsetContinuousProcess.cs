@@ -3,7 +3,7 @@ using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Random.Process.Continuous.Instance.Type;
 
-public interface IOffsetContinuousProcess<T>
+public interface IOffsetContinuousProcess<out T>
     : IContinuousProcess<T>
     where T : notnull
 {
