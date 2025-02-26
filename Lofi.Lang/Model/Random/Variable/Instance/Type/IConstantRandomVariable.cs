@@ -1,5 +1,5 @@
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Lang.Model.Random.Variable.Visitor;
+using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Model.Random.Variable.Instance.Type;
 
@@ -9,6 +9,11 @@ public interface IConstantRandomVariable<out T>
 {
     T Value { get; }
 
-    ISeq<T> IRandomVariable<T>.Sample()
-        => Value.ToSeq();
+    TResult IRandomVariable<T>.Accept<TResult>(
+        IRandomVariableVisitor<TResult> visitor)
+        => visitor.Visit(this);
+
+    ITypeConstructor<TC, T> IRandomVariable<T>.Accept<TC>(
+        IRandomVariableVisitor1<TC> visitor)
+        => visitor.Visit(this);
 }

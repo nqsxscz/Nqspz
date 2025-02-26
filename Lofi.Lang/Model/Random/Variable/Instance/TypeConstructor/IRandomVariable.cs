@@ -1,12 +1,9 @@
-using Lofi.Lang.Trait;
 using Lofi.Prelude.Control.Trait;
-using Lofi.Prelude.Data.Instance.Seq.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Model.Random.Variable.Instance.TypeConstructor;
 
 public interface IRandomVariable : 
-    ISampleable<IRandomVariable>,
     IApplicative<IRandomVariable>
 {
     static ITypeConstructor<IRandomVariable, T2>
@@ -30,10 +27,4 @@ public interface IRandomVariable :
             left.ToRandomVariable(),
             right.ToRandomVariable(),
             combinator);
-
-    static ISeq<T> ISampleable<IRandomVariable>.Sample<T>(
-        ITypeConstructor<IRandomVariable, T> sampleable)
-        => sampleable
-            .ToRandomVariable()
-            .Sample();
 }
