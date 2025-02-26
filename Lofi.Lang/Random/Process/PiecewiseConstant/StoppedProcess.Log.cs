@@ -7,7 +7,7 @@ public static partial class StoppedProcess
 {
     public static IStoppedProcess<T> Log<T>(
         this IStoppedProcess<T> operand)
-        where T : IReal<T>
+        where T : IRealFunctions<T>
         => operand
             .Select(
                 T.Log);

@@ -7,7 +7,7 @@ public static partial class Process
 {
     public static IProcess<T> Sqrt<T>(
         this IProcess<T> operand)
-        where T : IReal<T>
+        where T : IRealFunctions<T>
         => operand
             .Select(
                 T.Sqrt);

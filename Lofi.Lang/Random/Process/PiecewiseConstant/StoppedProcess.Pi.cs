@@ -6,7 +6,7 @@ namespace Lofi.Lang.Random.Process.PiecewiseConstant;
 public static partial class StoppedProcess
 {
     public static IStoppedProcess<T> Pi<T>()
-        where T : IReal<T>
+        where T : IRealFunctions<T>
         => T.Pi
             .ToStoppedProcess();
 }
