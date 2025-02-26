@@ -90,7 +90,7 @@ public static partial class Process
         where T1 : notnull
         where T2 : notnull
         => operand
-            .StoppingSequence
+            .StoppingSequence()
             .Occurrences(t)
             .Aggregate(
                 init.ToMaybe(),

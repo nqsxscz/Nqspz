@@ -1,7 +1,6 @@
 using Lofi.Lang.Random.Process.Continuous;
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Implementation;
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
-using Lofi.Lang.Random.Sequence;
 using Lofi.Supplier;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant;
@@ -13,7 +12,7 @@ public static partial class Process
         where T : notnull
         => value
             .ToContinuousProcess()
-            .Discretize(StoppingSequence.Empty);
+            .Discretize(Sequence.StoppingSequence.Empty);
 
     public static IPiecewiseConstantContinuousProcess<T> Of<T>(
         ISupplier<T> supplier,

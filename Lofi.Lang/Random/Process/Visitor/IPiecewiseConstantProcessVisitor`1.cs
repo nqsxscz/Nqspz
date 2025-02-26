@@ -3,18 +3,18 @@ using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Random.Process.Visitor;
 
-public interface IStoppedProcessVisitor<TC>
+public interface IPiecewiseConstantProcessVisitor1<TC>
     where TC : notnull
 {
     ITypeConstructor<TC, T> Visit<T>(
-        IDiscretizedPiecewiseConstantContinuousProcess<T> continuousProcess)
+        IDiscretizedPiecewiseConstantContinuousProcess<T> process)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IOffsetPiecewiseConstantContinuousProcess<T> continuousProcess)
+        IOffsetPiecewiseConstantContinuousProcess<T> process)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        ISupplierPiecewiseConstantContinuousProcess<T> continuousProcess)
+        ISupplierPiecewiseConstantContinuousProcess<T> process)
         where T : notnull;
 }

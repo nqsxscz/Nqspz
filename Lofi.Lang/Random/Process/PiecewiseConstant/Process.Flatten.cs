@@ -6,9 +6,11 @@ namespace Lofi.Lang.Random.Process.PiecewiseConstant;
 public static partial class Process
 {
     public static IPiecewiseConstantContinuousProcess<T> Flatten<T>(
-        this IPiecewiseConstantContinuousProcess<IMaybe<T>> continuousProcess)
+        this IPiecewiseConstantContinuousProcess<IMaybe<T>> process)
         where T : notnull
         => Continuous.Process
-            .Flatten(continuousProcess)
-            .Discretize(continuousProcess.StoppingSequence);
+            .Flatten(process)
+            .Discretize(
+                process
+                    .StoppingSequence());
 }

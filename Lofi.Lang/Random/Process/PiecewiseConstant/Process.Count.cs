@@ -17,6 +17,6 @@ public static partial class Process
         this IPiecewiseConstantContinuousProcess<T> continuousProcess)
         where T : notnull
         => continuousProcess
-            .StoppingSequence
+            .StoppingSequence()
             .Count();
 }

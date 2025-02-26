@@ -15,7 +15,11 @@ public interface ILiftContinuousProcess<T1, T2, out T3>
 
     Func<T1, T2, T3> Combinator { get; }
     
+    TResult IContinuousProcess<T3>.Accept<TResult>(
+        IContinuousProcessVisitor<TResult> visitor)
+        => visitor.Visit(this);
+    
     ITypeConstructor<TC, T3> IContinuousProcess<T3>.Accept<TC>(
-        IProcessVisitor<TC> visitor)
+        IContinuousProcessVisitor1<TC> visitor)
         => visitor.Visit(this);
 }

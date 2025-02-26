@@ -1,5 +1,4 @@
 using Lofi.Lang.Random.Process.PiecewiseConstant.Instance.Type;
-using Lofi.Lang.Random.Sequence;
 using Lofi.Lang.Random.Sequence.Instance.Type;
 
 namespace Lofi.Lang.Random.Process.PiecewiseConstant;
@@ -7,7 +6,7 @@ namespace Lofi.Lang.Random.Process.PiecewiseConstant;
 public static partial class Process
 {
     public static IPiecewiseConstantContinuousProcess<DateTime> Time()
-        => StoppingSequence
+        => Sequence.StoppingSequence
             .Empty
             .Time();
     
@@ -18,9 +17,9 @@ public static partial class Process
             .Discretize(stoppingSequence);
 
     public static IPiecewiseConstantContinuousProcess<DateTime> Time<T>(
-        this IPiecewiseConstantContinuousProcess<T> continuousProcess)
+        this IPiecewiseConstantContinuousProcess<T> process)
         where T : notnull
-        => continuousProcess
-            .StoppingSequence
+        => process
+            .StoppingSequence()
             .Time();
 }

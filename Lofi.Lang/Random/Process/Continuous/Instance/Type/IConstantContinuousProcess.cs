@@ -8,8 +8,12 @@ public interface IConstantContinuousProcess<out T>
     where T : notnull
 {
     T Value { get; }
+
+    TResult IContinuousProcess<T>.Accept<TResult>(
+        IContinuousProcessVisitor<TResult> visitor)
+        => visitor.Visit(this);
     
     ITypeConstructor<TC, T> IContinuousProcess<T>.Accept<TC>(
-        IProcessVisitor<TC> visitor)
+        IContinuousProcessVisitor1<TC> visitor)
         => visitor.Visit(this);
 }

@@ -1,4 +1,5 @@
 using Lofi.Lang.Random.Process.Continuous;
+using Lofi.Lang.Random.Process.PiecewiseConstant;
 using Lofi.Lang.Random.Sequence;
 using Lofi.Lang.Random.Time.Instance.Type;
 using Lofi.Prelude.Control;
@@ -57,7 +58,7 @@ public static partial class StoppingTime
                     Index: var index
                 } =>
                 predicate
-                    .StoppingSequence
+                    .StoppingSequence()
                     .Occurrences(t)
                     .Where(s =>
                         predicate.Observe(s)

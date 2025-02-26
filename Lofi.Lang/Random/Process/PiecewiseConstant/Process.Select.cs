@@ -13,5 +13,7 @@ public static partial class Process
             .Select(
                 operand,
                 selector)
-            .Discretize(operand.StoppingSequence);
+            .Discretize(
+                operand
+                    .StoppingSequence());
 }

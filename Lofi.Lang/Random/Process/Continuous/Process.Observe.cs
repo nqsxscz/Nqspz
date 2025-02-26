@@ -8,10 +8,10 @@ namespace Lofi.Lang.Random.Process.Continuous;
 public static partial class Process
 {
     public static IMaybe<T> Observe<T>(
-        this IContinuousProcess<T> continuousProcess, 
+        this IContinuousProcess<T> process, 
         DateTime t)
         where T : notnull
-        => continuousProcess
+        => process
             .Accept(ProcessVisitor.Observe(t))
             .ToMaybe();
 }

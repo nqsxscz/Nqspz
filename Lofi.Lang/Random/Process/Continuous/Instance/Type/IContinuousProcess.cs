@@ -8,7 +8,11 @@ public interface IContinuousProcess<out T>
     : ITypeConstructor<IContinuousProcess, T>
     where T : notnull
 {
+    TResult Accept<TResult>(
+        IContinuousProcessVisitor<TResult> visitor)
+        where TResult : notnull;
+    
     ITypeConstructor<TC, T> Accept<TC>(
-        IProcessVisitor<TC> visitor)
+        IContinuousProcessVisitor1<TC> visitor)
         where TC : notnull;
 }

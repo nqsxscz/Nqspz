@@ -13,14 +13,15 @@ public static partial class Process
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull
-        => Continuous.Process.Lift(
+        => Continuous.Process
+            .Lift(
                 left,
                 right,
                 combinator)
             .Discretize(
-                left.StoppingSequence
+                left.StoppingSequence()
                     .Union(
-                        right.StoppingSequence));
+                        right.StoppingSequence()));
 
     public static IPiecewiseConstantContinuousProcess<T3> Lift<T1, T2, T3>(
         IContinuousProcess<T1> left,
@@ -31,7 +32,7 @@ public static partial class Process
         where T3 : notnull
         => Lift(
             left.Discretize(
-                right.StoppingSequence),
+                right.StoppingSequence()),
             right,
             combinator);
 
@@ -45,6 +46,6 @@ public static partial class Process
         => Lift(
             left,
             right.Discretize(
-                left.StoppingSequence),
+                left.StoppingSequence()),
             combinator);
 }

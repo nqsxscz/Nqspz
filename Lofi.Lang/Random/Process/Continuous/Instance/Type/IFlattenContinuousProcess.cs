@@ -10,7 +10,11 @@ public interface IFlattenContinuousProcess<out T> :
 {
     IContinuousProcess<IMaybe<T>> Operand { get; }
     
+    TResult IContinuousProcess<T>.Accept<TResult>(
+        IContinuousProcessVisitor<TResult> visitor)
+        => visitor.Visit(this);
+    
     ITypeConstructor<TC, T> IContinuousProcess<T>.Accept<TC>(
-        IProcessVisitor<TC> visitor)
+        IContinuousProcessVisitor1<TC> visitor)
         => visitor.Visit(this);
 }

@@ -11,8 +11,12 @@ public interface ISelectContinuousProcess<T1, out T2>
     IContinuousProcess<T1> Operand { get; }
 
     Func<T1, T2> Selector { get; }
+    
+    TResult IContinuousProcess<T2>.Accept<TResult>(
+        IContinuousProcessVisitor<TResult> visitor)
+        => visitor.Visit(this);
 
     ITypeConstructor<TC, T2> IContinuousProcess<T2>.Accept<TC>(
-        IProcessVisitor<TC> visitor)
+        IContinuousProcessVisitor1<TC> visitor)
         => visitor.Visit(this);
 }
