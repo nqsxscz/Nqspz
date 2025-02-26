@@ -14,8 +14,9 @@ public static partial class StochasticProcess
         where T : 
         IAdditiveGroup<T>,
         IMultiplicativeSemigroup<T> 
-        => new NonRecursiveIntegralStochasticProcess<T>(
-            integrand, 
+        => Integrate(
+            (_, y) => y,
+            integrand,
             integrator);
     
     public static IStochasticProcess<T> Integrate<T>(
@@ -24,8 +25,9 @@ public static partial class StochasticProcess
         where T : 
             IAdditiveGroup<T>,
             IMultiplicativeSemigroup<T> 
-        => new RecursiveIntegralStochasticProcess0<T>(
-            function, 
+        => Integrate(
+            (x, _) => function(x),
+            T.Zero.ToStochasticProcess(),
             integrator);
     
     public static IStochasticProcess<T> Integrate<T>(
@@ -35,7 +37,7 @@ public static partial class StochasticProcess
         where T : 
         IAdditiveGroup<T>,
         IMultiplicativeSemigroup<T> 
-        => new RecursiveIntegralStochasticProcess1<T>(
+        => new IntegralStochasticProcess<T>(
             function, 
             operand, 
             integrator);

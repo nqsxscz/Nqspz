@@ -1,3 +1,4 @@
+using Lofi.Lang.Model.Random.Variable.Instance.Implementation;
 using Lofi.Lang.Model.Random.Variable.Instance.Type;
 
 namespace Lofi.Lang.Model.Random.Variable;
@@ -9,5 +10,7 @@ public static partial class RandomVariable
         Func<T1, T2> selector)
         where T1 : notnull
         where T2 : notnull
-        => throw new NotImplementedException();
+        => new SelectRandomVariable<T1,T2>(
+            operand, 
+            selector);
 }

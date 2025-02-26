@@ -1,3 +1,4 @@
+using Lofi.Lang.Model.Random.Variable.Instance.Implementation;
 using Lofi.Lang.Model.Random.Variable.Instance.Type;
 
 namespace Lofi.Lang.Model.Random.Variable;
@@ -11,5 +12,8 @@ public static partial class RandomVariable
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull
-        => throw new NotImplementedException();
+        => new LiftRandomVariable<T1,T2,T3>(
+            left, 
+            right, 
+            combinator);
 }
