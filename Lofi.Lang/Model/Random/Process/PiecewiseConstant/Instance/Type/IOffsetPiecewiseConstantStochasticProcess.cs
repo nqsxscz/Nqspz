@@ -1,7 +1,5 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type;
 using Lofi.Lang.Model.Random.Process.Visitor;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Seq.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Model.Random.Process.PiecewiseConstant.Instance.Type;
