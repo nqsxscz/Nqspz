@@ -19,6 +19,10 @@ public interface IContinuousProcessVisitor1<TC>
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
+        IOffsetContinuousProcess<T> process)
+        where T : notnull;
+    
+    ITypeConstructor<TC, T> Visit<T>(
         IFlattenContinuousProcess<T> process)
         where T : notnull;
 

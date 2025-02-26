@@ -18,6 +18,10 @@ public interface IContinuousProcessVisitor<out TResult>
         where T : notnull;
     
     TResult Visit<T>(
+        IOffsetContinuousProcess<T> process)
+        where T : notnull;
+    
+    TResult Visit<T>(
         IFlattenContinuousProcess<T> process)
         where T : notnull;
 

@@ -33,6 +33,18 @@ public interface IObserveVisitor
             .Value
             .ToMaybe();
 
+    ITypeConstructor<IMaybe, T>
+        IContinuousProcessVisitor1<IMaybe>.Visit<T>(
+            IOffsetContinuousProcess<T> continuousProcess)
+        => continuousProcess
+            .Operand
+            .Observe(
+                continuousProcess
+                    .Offsetter(
+                        Time, 
+                        continuousProcess
+                            .Offset));
+    
     ITypeConstructor<IMaybe, T> 
         IContinuousProcessVisitor1<IMaybe>.Visit<T>(
             IFlattenContinuousProcess<T> continuousProcess) 
