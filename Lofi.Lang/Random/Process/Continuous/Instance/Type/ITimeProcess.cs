@@ -1,11 +1,12 @@
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Lang.Random.Process.Visitor;
+using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Random.Process.Continuous.Instance.Type;
 
 public interface ITimeProcess
     : IProcess<DateTime>
 {
-    IMaybe<DateTime> IProcess<DateTime>.Observe(DateTime t)
-        => t.ToMaybe();
+    ITypeConstructor<TC, DateTime> IProcess<DateTime>.Accept<TC>(
+        IProcessVisitor<TC> visitor)
+        => visitor.Visit(this);
 }

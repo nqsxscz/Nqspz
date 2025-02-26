@@ -1,3 +1,4 @@
+using Lofi.Lang.Random.Process.Continuous;
 using Lofi.Prelude.Control.Trait;
 using Lofi.Prelude.Data.Instance.Maybe.Type;
 using Lofi.Prelude.Type;

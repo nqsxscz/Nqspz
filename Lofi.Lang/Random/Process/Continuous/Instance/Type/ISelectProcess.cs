@@ -1,6 +1,5 @@
-using Lofi.Prelude.Control;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Lang.Random.Process.Visitor;
+using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Random.Process.Continuous.Instance.Type;
 
@@ -13,9 +12,7 @@ public interface ISelectProcess<T1, out T2>
 
     Func<T1, T2> Selector { get; }
 
-    IMaybe<T2> IProcess<T2>.Observe(DateTime t)
-        => Operand
-            .Observe(t)
-            .Select(Selector)
-            .ToMaybe();
+    ITypeConstructor<TC, T2> IProcess<T2>.Accept<TC>(
+        IProcessVisitor<TC> visitor)
+        => visitor.Visit(this);
 }

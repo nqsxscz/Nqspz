@@ -1,3 +1,4 @@
+using Lofi.Lang.Random.Process.Continuous;
 using Lofi.Lang.Random.Sequence;
 using Lofi.Lang.Random.Time.Instance.Type;
 using Lofi.Prelude.Control;
