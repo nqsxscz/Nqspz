@@ -17,25 +17,25 @@ public interface IObserveVisitor
     
     ITypeConstructor<IMaybe, DateTime> 
         IProcessVisitor<IMaybe>.Visit(
-            ITimeProcess process)
+            ITimeContinuousProcess continuousProcess)
         => Time.ToMaybe();
 
     ITypeConstructor<IMaybe, T> 
         IProcessVisitor<IMaybe>.Visit<T>(
-            IEmptyProcess<T> process) 
+            IEmptyContinuousProcess<T> continuousProcess) 
         => Maybe.Nothing<T>();
 
     ITypeConstructor<IMaybe, T> 
         IProcessVisitor<IMaybe>.Visit<T>(
-            IConstantProcess<T> process) 
-        => process
+            IConstantContinuousProcess<T> continuousProcess) 
+        => continuousProcess
             .Value
             .ToMaybe();
 
     ITypeConstructor<IMaybe, T> 
         IProcessVisitor<IMaybe>.Visit<T>(
-            IFlattenProcess<T> process) 
-        => process
+            IFlattenContinuousProcess<T> continuousProcess) 
+        => continuousProcess
             .Operand
             .Observe(Time)
             .Flatten()
@@ -43,67 +43,67 @@ public interface IObserveVisitor
 
     ITypeConstructor<IMaybe, T> 
         IStoppedProcessVisitor<IMaybe>.Visit<T>(
-            IDiscretizedStoppedProcess<T> process)
-        => process
+            IDiscretizedPiecewiseConstantContinuousProcess<T> continuousProcess)
+        => continuousProcess
             .StoppingSequence
             .Occurrences(Time)
             .MaybeLast()
             .SelectMany(
-                process
+                continuousProcess
                     .Operand
                     .Observe)
             .ToMaybe();
     
     ITypeConstructor<IMaybe, T> 
         IStoppedProcessVisitor<IMaybe>.Visit<T>(
-            IOffsetStoppedProcess<T> process)
-        => process
+            IOffsetPiecewiseConstantContinuousProcess<T> continuousProcess)
+        => continuousProcess
             .StoppingSequence
             .Occurrences(Time)
             .SkipLast(
-                process
+                continuousProcess
                     .Offset)
             .MaybeLast()
             .SelectMany(
-                process
+                continuousProcess
                     .Operand
                     .Observe)
             .ToMaybe();
     
     ITypeConstructor<IMaybe, T> 
         IStoppedProcessVisitor<IMaybe>.Visit<T>(
-            ISupplierStoppedProcess<T> process)
-        => process
+            ISupplierPiecewiseConstantContinuousProcess<T> continuousProcess)
+        => continuousProcess
             .Supplier
             .Times
             .Where(s => s <= Time)
             .MaybeLast()
             .SelectMany(
-                process
+                continuousProcess
                     .Supplier
-                    .Ask(process.Key))
+                    .Ask(continuousProcess.Key))
             .ToMaybe();
 
     ITypeConstructor<IMaybe, T2> 
         IProcessVisitor<IMaybe>.Visit<T1, T2>(
-            ISelectProcess<T1, T2> process)
-        => process
+            ISelectContinuousProcess<T1, T2> continuousProcess)
+        => continuousProcess
             .Operand
             .Observe(Time)
-            .Select(process.Selector)
+            .Select(continuousProcess.Selector)
             .ToMaybe();
 
     ITypeConstructor<IMaybe, T3> 
         IProcessVisitor<IMaybe>.Visit<T1, T2, T3>(
-            ILiftProcess<T1, T2, T3> process)
-        => process
+            ILiftContinuousProcess<T1, T2, T3> continuousProcess)
+        => continuousProcess
             .Left
             .Observe(Time)
             .Lift(
-                process
+                continuousProcess
                     .Right
                     .Observe(Time),
-                process
+                continuousProcess
                     .Combinator)
             .ToMaybe();
 }

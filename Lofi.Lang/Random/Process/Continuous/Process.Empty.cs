@@ -5,7 +5,7 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Empty<T>()
+    public static IContinuousProcess<T> Empty<T>()
         where T : notnull
-        => new EmptyProcess<T>();
+        => new EmptyContinuousProcess<T>();
 }

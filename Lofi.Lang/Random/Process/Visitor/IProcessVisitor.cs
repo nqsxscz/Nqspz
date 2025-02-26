@@ -9,27 +9,27 @@ public interface IProcessVisitor<TC>
     where TC : notnull
 {
     ITypeConstructor<TC, DateTime> Visit(
-        ITimeProcess process);
+        ITimeContinuousProcess continuousProcess);
     
     ITypeConstructor<TC, T> Visit<T>(
-        IEmptyProcess<T> process)
+        IEmptyContinuousProcess<T> continuousProcess)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IConstantProcess<T> process)
+        IConstantContinuousProcess<T> continuousProcess)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IFlattenProcess<T> process)
+        IFlattenContinuousProcess<T> continuousProcess)
         where T : notnull;
 
     ITypeConstructor<TC, T2> Visit<T1, T2>(
-        ISelectProcess<T1, T2> process)
+        ISelectContinuousProcess<T1, T2> continuousProcess)
         where T1 : notnull
         where T2 : notnull;
     
     ITypeConstructor<TC, T3> Visit<T1, T2, T3>(
-        ILiftProcess<T1, T2, T3> process)
+        ILiftContinuousProcess<T1, T2, T3> continuousProcess)
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull;

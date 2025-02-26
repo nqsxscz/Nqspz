@@ -5,8 +5,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Zero<T>()
+    public static IContinuousProcess<T> Zero<T>()
         where T : IAdditiveMonoid<T>
         => T.Zero
-            .ToProcess();
+            .ToContinuousProcess();
 }

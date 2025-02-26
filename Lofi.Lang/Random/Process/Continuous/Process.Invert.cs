@@ -6,8 +6,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Invert<T>(
-        this IProcess<T> operand)
+    public static IContinuousProcess<T> Invert<T>(
+        this IContinuousProcess<T> operand)
         where T : IGroup<T>
         => operand
             .Select(

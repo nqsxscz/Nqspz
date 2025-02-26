@@ -19,7 +19,7 @@ public static partial class StoppingSequence
             .ToStoppingSequence();
 
     public static IStoppingSequence Of(
-        IStoppedProcess<bool> predicate)
+        IPiecewiseConstantContinuousProcess<bool> predicate)
         => Iota(1)
             .Select(predicate.ToStoppingTime)
             .ToStoppingSequence();

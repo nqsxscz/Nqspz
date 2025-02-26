@@ -6,8 +6,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Flatten<T>(
-        this IProcess<IMaybe<T>> process)
+    public static IContinuousProcess<T> Flatten<T>(
+        this IContinuousProcess<IMaybe<T>> continuousProcess)
         where T : notnull
-        => new FlattenProcess<T>(process);
+        => new FlattenContinuousProcess<T>(continuousProcess);
 }

@@ -5,8 +5,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Top<T>()
+    public static IContinuousProcess<T> Top<T>()
         where T : IToppable<T>
         => T.Top
-            .ToProcess();
+            .ToContinuousProcess();
 }

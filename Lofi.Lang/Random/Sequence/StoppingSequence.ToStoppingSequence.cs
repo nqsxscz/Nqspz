@@ -15,6 +15,6 @@ public static partial class StoppingSequence
         => Of(dateTimes);
 
     public static IStoppingSequence ToStoppingSequence(
-        this IStoppedProcess<bool> predicate)
+        this IPiecewiseConstantContinuousProcess<bool> predicate)
         => Of(predicate);
 }

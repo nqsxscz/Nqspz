@@ -6,9 +6,9 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Divide<T>(
-        this IProcess<T> left, 
-        IProcess<T> right)
+    public static IContinuousProcess<T> Divide<T>(
+        this IContinuousProcess<T> left, 
+        IContinuousProcess<T> right)
         where T : IMultiplicativeGroup<T>
         => Lift(
             left, 

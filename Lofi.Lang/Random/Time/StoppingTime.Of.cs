@@ -10,7 +10,7 @@ public static partial class StoppingTime
         => new ConstantStoppingTime(dt);
 
     public static IStoppingTime Of(
-        IStoppedProcess<bool> predicate,
+        IPiecewiseConstantContinuousProcess<bool> predicate,
         int index = 1)
         => new PredicateStoppingTime(
             predicate,

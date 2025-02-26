@@ -5,7 +5,7 @@ namespace Lofi.Lang.Random.Time.Instance.Type;
 public interface IPredicateStoppingTime
     : IStoppingTime
 {
-    IStoppedProcess<bool> Predicate { get; }
+    IPiecewiseConstantContinuousProcess<bool> Predicate { get; }
 
     int Index { get; }
 }

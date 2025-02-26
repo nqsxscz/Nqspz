@@ -7,14 +7,14 @@ public interface IStoppedProcessVisitor<TC>
     where TC : notnull
 {
     ITypeConstructor<TC, T> Visit<T>(
-        IDiscretizedStoppedProcess<T> process)
+        IDiscretizedPiecewiseConstantContinuousProcess<T> continuousProcess)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IOffsetStoppedProcess<T> process)
+        IOffsetPiecewiseConstantContinuousProcess<T> continuousProcess)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        ISupplierStoppedProcess<T> process)
+        ISupplierPiecewiseConstantContinuousProcess<T> continuousProcess)
         where T : notnull;
 }

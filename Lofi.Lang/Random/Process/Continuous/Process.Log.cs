@@ -5,8 +5,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Log<T>(
-        this IProcess<T> operand)
+    public static IContinuousProcess<T> Log<T>(
+        this IContinuousProcess<T> operand)
         where T : IRealFunctions<T>
         => operand
             .Select(

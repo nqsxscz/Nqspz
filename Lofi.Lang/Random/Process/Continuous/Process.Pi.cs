@@ -5,8 +5,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Pi<T>()
+    public static IContinuousProcess<T> Pi<T>()
         where T : IRealFunctions<T>
         => T.Pi
-            .ToProcess();
+            .ToContinuousProcess();
 }

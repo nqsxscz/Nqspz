@@ -6,9 +6,9 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Minimum<T>(
-        this IProcess<T> left, 
-        IProcess<T> right)
+    public static IContinuousProcess<T> Minimum<T>(
+        this IContinuousProcess<T> left, 
+        IContinuousProcess<T> right)
         where T : IOrderable<T>
         => Lift(
             left, 

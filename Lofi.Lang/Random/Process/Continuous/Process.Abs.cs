@@ -7,8 +7,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Abs<T>(
-        this IProcess<T> operand)
+    public static IContinuousProcess<T> Abs<T>(
+        this IContinuousProcess<T> operand)
         where T : 
             IAdditiveGroup<T>,
             IOrderable<T>

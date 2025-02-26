@@ -6,8 +6,8 @@ namespace Lofi.Lang.Random.Process.Continuous;
 
 public static partial class Process
 {
-    public static IProcess<T> Negate<T>(
-        this IProcess<T> operand)
+    public static IContinuousProcess<T> Negate<T>(
+        this IContinuousProcess<T> operand)
         where T : IAdditiveGroup<T>
         => operand
             .Select(
