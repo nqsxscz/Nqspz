@@ -1,7 +1,7 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Constant;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Correlated;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Differential;
-using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Integral;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Lift;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Offset;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Select;
@@ -46,7 +46,7 @@ public interface IContinuousProcessVisitor1<TC>
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IIntegralStochasticProcess<T> process)
+        IItoStochasticProcess<T> process)
         where T : 
         IAdditiveGroup<T>,
         IMultiplicativeSemigroup<T>;

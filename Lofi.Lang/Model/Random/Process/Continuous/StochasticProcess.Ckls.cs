@@ -6,14 +6,35 @@ namespace Lofi.Lang.Model.Random.Process.Continuous;
 public static partial class StochasticProcess
 {
     public static IStochasticProcess<T> Ckls<T>(
+        T init,
         T alpha,
         T beta,
         T sigma,
         T gamma,
-        Func<TimeSpan, T> g)
+        Func<TimeSpan, T> converter)
+        where T : IReal<T>
+        => Ckls(
+            init, 
+            alpha, 
+            beta, 
+            sigma, 
+            gamma, 
+            converter, 
+            Wiener<T>());
+    
+    private static IStochasticProcess<T> Ckls<T>(
+        T init,
+        T alpha,
+        T beta,
+        T sigma,
+        T gamma,
+        Func<TimeSpan, T> converter,
+        IStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
+            init,
             s => alpha + beta * s, 
             s => sigma * (s^gamma), 
-            g);
+            converter,
+            wiener);
 }

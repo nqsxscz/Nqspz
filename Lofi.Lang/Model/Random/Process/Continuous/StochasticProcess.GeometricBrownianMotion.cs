@@ -6,12 +6,29 @@ namespace Lofi.Lang.Model.Random.Process.Continuous;
 public static partial class StochasticProcess
 {
     public static IStochasticProcess<T> GeometricBrownianMotion<T>(
+        T init,
         T mu,
         T sigma,
-        Func<TimeSpan, T> g)
+        Func<TimeSpan, T> converter)
+        where T : IReal<T>
+        => GeometricBrownianMotion(
+            init, 
+            mu, 
+            sigma, 
+            converter, 
+            Wiener<T>());
+    
+    private static IStochasticProcess<T> GeometricBrownianMotion<T>(
+        T init,
+        T mu,
+        T sigma,
+        Func<TimeSpan, T> converter,
+        IStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
+            init,
             s => mu * s, 
             s => sigma * s, 
-            g);
+            converter,
+            wiener);
 }

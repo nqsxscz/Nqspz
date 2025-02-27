@@ -5,6 +5,6 @@ namespace Lofi.Lang.Model.Random.Process.Continuous;
 
 public static partial class StochasticProcess
 {
-    public static IStochasticProcess<DateTime> Time()
+    public static IStochasticProcess<DateTime> Time
         => new TimeStochasticProcess();
 }

@@ -3,17 +3,27 @@ using Lofi.Prelude.Algebra.Trait.Additive;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Type;
 
-namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Integral;
+namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
 
-public interface IIntegralStochasticProcess<T>
+public interface IItoStochasticProcess<T>
     : IStochasticProcess<T>
     where T : 
     IAdditiveGroup<T>,
     IMultiplicativeSemigroup<T>
 {
-    Func<T, T, T> Function { get; }
+    T Init { get; }
     
-    IStochasticProcess<T> Operand { get; }
+    Func<T, T, T> Drift { get; }
+    
+    Func<T, T, T> Volatility { get; }
+    
+    Func<TimeSpan, T> Converter { get; }
+    
+    IStochasticProcess<T> Left { get; }
+    
+    IStochasticProcess<T> Right { get; }
+    
+    IStochasticProcess<T> Wiener { get; }
     
     TResult IStochasticProcess<T>.Accept<TResult>(
         IContinuousProcessVisitor<TResult> visitor)

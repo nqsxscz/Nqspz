@@ -7,13 +7,32 @@ namespace Lofi.Lang.Model.Random.Process.Continuous;
 public static partial class StochasticProcess
 {
     public static IStochasticProcess<T> CoxIngersollRoss<T>(
+        T init,
         T theta,
         T mu,
         T sigma,
-        Func<TimeSpan, T> g)
+        Func<TimeSpan, T> converter)
+        where T : IReal<T>
+        => CoxIngersollRoss(
+            init, 
+            theta, 
+            mu, 
+            sigma, 
+            converter, 
+            Wiener<T>());
+    
+    private static IStochasticProcess<T> CoxIngersollRoss<T>(
+        T init,
+        T theta,
+        T mu,
+        T sigma,
+        Func<TimeSpan, T> converter,
+        IStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
+            init,
             s => theta * (mu - s), 
             s => sigma * s.Sqrt(), 
-            g);
+            converter,
+            wiener);
 }
