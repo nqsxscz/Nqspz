@@ -1,9 +1,0 @@
-using Lofi.Lang.Random.Temporal.Continuous.Instance.Type;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
-
-namespace Lofi.Lang.Random.Temporal.Continuous.Instance.Implementation;
-
-internal sealed record FlattenTemporal<T>(
-    ITemporal<IMaybe<T>> Operand) :
-    IFlattenTemporal<T>
-    where T : notnull;

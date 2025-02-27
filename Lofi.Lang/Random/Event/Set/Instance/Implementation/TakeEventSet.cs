@@ -1,8 +1,0 @@
-using Lofi.Lang.Random.Event.Set.Instance.Type;
-
-namespace Lofi.Lang.Random.Event.Set.Instance.Implementation;
-
-internal sealed record TakeEventSet(
-    IEventSet Operand,
-    int Count)
-    : ITakeEventSet;

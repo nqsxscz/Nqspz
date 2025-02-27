@@ -2,9 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Prelude", "Lofi.Prelude\Lofi.Prelude.csproj", "{AE7AE30D-8BE9-4CF7-B1FE-BB244FEB98BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang", "Lofi.Lang\Lofi.Lang.csproj", "{D2FEF2C9-82B8-4B83-BA72-F4416840E770}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Supplier", "Lofi.Supplier\Lofi.Supplier.csproj", "{63F15C8C-D10A-49B3-BE90-F002C49AFB7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Process", "Lofi.Lang.Stochastic.Process\Lofi.Lang.Stochastic.Process.csproj", "{74F8BF50-8F45-482E-8CAA-5DF6C97E652E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Observable", "Lofi.Lang.Observable\Lofi.Lang.Observable.csproj", "{2D4C8F6D-8A82-4157-97F8-0C794FADE1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Sample", "Lofi.Lang.Stochastic.Sample\Lofi.Lang.Stochastic.Sample.csproj", "{8EC8714D-601F-467A-AEA3-FD10D5AEA2E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Trajectory", "Lofi.Lang.Stochastic.Trajectory\Lofi.Lang.Stochastic.Trajectory.csproj", "{E91E77A5-BCDE-4935-B569-A01C3F822E82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +22,25 @@ Global
 		{AE7AE30D-8BE9-4CF7-B1FE-BB244FEB98BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE7AE30D-8BE9-4CF7-B1FE-BB244FEB98BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE7AE30D-8BE9-4CF7-B1FE-BB244FEB98BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2FEF2C9-82B8-4B83-BA72-F4416840E770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2FEF2C9-82B8-4B83-BA72-F4416840E770}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2FEF2C9-82B8-4B83-BA72-F4416840E770}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2FEF2C9-82B8-4B83-BA72-F4416840E770}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63F15C8C-D10A-49B3-BE90-F002C49AFB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63F15C8C-D10A-49B3-BE90-F002C49AFB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63F15C8C-D10A-49B3-BE90-F002C49AFB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63F15C8C-D10A-49B3-BE90-F002C49AFB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F8BF50-8F45-482E-8CAA-5DF6C97E652E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F8BF50-8F45-482E-8CAA-5DF6C97E652E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F8BF50-8F45-482E-8CAA-5DF6C97E652E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F8BF50-8F45-482E-8CAA-5DF6C97E652E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4C8F6D-8A82-4157-97F8-0C794FADE1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4C8F6D-8A82-4157-97F8-0C794FADE1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4C8F6D-8A82-4157-97F8-0C794FADE1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4C8F6D-8A82-4157-97F8-0C794FADE1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC8714D-601F-467A-AEA3-FD10D5AEA2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC8714D-601F-467A-AEA3-FD10D5AEA2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC8714D-601F-467A-AEA3-FD10D5AEA2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC8714D-601F-467A-AEA3-FD10D5AEA2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
