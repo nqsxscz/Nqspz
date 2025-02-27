@@ -13,29 +13,30 @@ public interface IEulerMaruyamaSampler
 {
     ITrajectory<T> ISampler.Sample<T>(
         IItoStochasticProcess<T> process, 
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
     {
         var dt = 
             StochasticProcess
                 .Time
                 .Differentiate(process.Converter)
-                .Sample(this, times);
+                .Sample(this, times, seed);
         
         var dwt =
             process
                 .Wiener
                 .Differentiate()
-                .Sample(this, times);
+                .Sample(this, times, seed);
 
         var at =
             process
                 .Left
-                .Sample(this, times);
+                .Sample(this, times, seed);
         
         var bt =
             process
                 .Right
-                .Sample(this, times);
+                .Sample(this, times, seed);
 
         return Scannable
             .ScanLeft(

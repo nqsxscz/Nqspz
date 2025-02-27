@@ -18,7 +18,7 @@ public interface IStochasticProcessVisitor<out TResult>
         ITimeStochasticProcess process);
     
     TResult Visit<T>(
-        IWienerStochasticProcess<T> process)
+        IStandardWienerStochasticProcess<T> process)
         where T : IReal<T>;
     
     TResult Visit<T>(

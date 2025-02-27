@@ -8,5 +8,12 @@ public static partial class StochasticProcess
 {
     public static IWienerStochasticProcess<T> Wiener<T>()
         where T : IReal<T>
-        => new WienerStochasticProcess<T>();
+        => Wiener<T>(
+            Guid
+                .NewGuid()
+                .GetHashCode());
+    
+    public static IWienerStochasticProcess<T> Wiener<T>(int id)
+        where T : IReal<T>
+        => new StandardWienerStochasticProcess<T>(id);
 }

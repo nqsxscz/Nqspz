@@ -19,7 +19,7 @@ public interface IStochasticProcessVisitor1<TC>
         ITimeStochasticProcess process);
     
     ITypeConstructor<TC, T> Visit<T>(
-        IWienerStochasticProcess<T> process)
+        IStandardWienerStochasticProcess<T> process)
         where T : IReal<T>;
     
     ITypeConstructor<TC, T> Visit<T>(

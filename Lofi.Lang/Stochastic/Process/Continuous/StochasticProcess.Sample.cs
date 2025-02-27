@@ -12,13 +12,15 @@ public static partial class StochasticProcess
     public static ITrajectory<T> Sample<T>(
         this IStochasticProcess<T> process,
         ISampler sampler,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : notnull
         => process
             .Accept(
                 StochasticProcessVisitor
                     .Sample(
                         sampler, 
-                        times))
+                        times,
+                        seed))
             .ToTrajectory();
 }

@@ -1,5 +1,3 @@
-using MathNet.Numerics.Distributions;
-
 using Lofi.Lang.Stochastic.Process.Continuous;
 using Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Constant;
 using Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Differential;
@@ -24,9 +22,12 @@ using Scannable = Prelude.Control.Scannable;
 
 public interface ISampler
 {
+    IStandardNormalSampler StandardNormalSampler { get; } 
+    
     ITrajectory<T> Sample<T>(
         IItoStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : IReal<T>;
 
     ITrajectory<DateTime> Sample(
@@ -35,21 +36,26 @@ public interface ISampler
         => times.ToTrajectory();
 
     ITrajectory<T> Sample<T>(
-        IWienerStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        IStandardWienerStochasticProcess<T> process,
+        ISeq<DateTime> times,
+        int seed)
         where T : IReal<T>
         => Scannable
             .ScanLeft(
                 process
                     .Differentiate()
-                    .Sample(this, times), 
+                    .Sample(
+                        this, 
+                        times, 
+                        seed), 
                 T.Zero, 
                 Semigroup.Add)
             .ToTrajectory();
 
     ITrajectory<T> Sample<T>(
         ICorrelatedWienerStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : IReal<T>
         => StochasticProcess
             .Lift(
@@ -66,7 +72,10 @@ public interface ISampler
                                         .Multiply(process.Correlation))
                                 .Sqrt()
                                 .Multiply(w2)))
-            .Sample(this, times);
+            .Sample(
+                this, 
+                times, 
+                seed);
 
     ITrajectory<T> Sample<T>(
         IConstantStochasticProcess<T> process,
@@ -79,12 +88,16 @@ public interface ISampler
 
     ITrajectory<T> Sample<T>(
         IGenericDifferentialStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : IAdditiveGroup<T>
     {
         var trajectory = process
             .Operand
-            .Sample(this, times)
+            .Sample(
+                this, 
+                times,
+                seed)
             .ToSeq();
         return trajectory
             .Zip(trajectory.Skip(1))
@@ -106,26 +119,25 @@ public interface ISampler
 
     ITrajectory<T> Sample<T>(
         IWienerDifferentialStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : IReal<T>
-        => RandomTrajectory.Lift(
-            StochasticProcess
-                .Time
-                .Differentiate(process.Converter)
-                .Sample(this, times), 
-            Normal
-                .Samples(0, 1)
-                .ToSeq()
-                .ToTrajectory(), 
-            (dt, z) => 
-                dt.Sqrt()
-                    .Multiply(
-                        T.FromDouble(z))
-        );
+        => process.Operand switch
+        {
+            IStandardWienerStochasticProcess<T>
+                {
+                    Id: var id
+                } =>
+                SampleStandard(id, process.Converter, times, seed),
+            ICorrelatedWienerStochasticProcess<T> correlated =>
+                SampleCorrelated(correlated, times, seed),
+            _ => throw new InvalidOperationException()
+        };
 
     ITrajectory<T> Sample<T>(
         IOffsetStochasticProcess<T> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T : notnull
         => process
             .Operand
@@ -133,21 +145,24 @@ public interface ISampler
                 this,
                 times
                     .Select(process.Offsetter)
-                    .ToSeq());
+                    .ToSeq(),
+                seed);
     
     ITrajectory<T2> Sample<T1, T2>(
         ISelectStochasticProcess<T1, T2> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T1 : notnull
         where T2 : notnull
         => process
             .Operand
-            .Sample(this, times)
+            .Sample(this, times, seed)
             .Select(process.Selector);
 
     ITrajectory<T3> Sample<T1, T2, T3>(
         ILiftStochasticProcess<T1, T2, T3> process,
-        ISeq<DateTime> times)
+        ISeq<DateTime> times,
+        int seed)
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull
@@ -155,10 +170,47 @@ public interface ISampler
             .Lift(
                 process
                     .Left
-                    .Sample(this, times),
+                    .Sample(this, times, seed),
                 process
                     .Right
-                    .Sample(this, times),
+                    .Sample(this, times, seed),
                 process
                     .Combinator);
+    
+    ITrajectory<T> SampleStandard<T>(
+        int id,
+        Func<TimeSpan, T> converter,
+        ISeq<DateTime> times,
+        int seed)
+        where T : IReal<T>
+        => RandomTrajectory.Lift(
+            StochasticProcess
+                .Time
+                .Differentiate(converter)
+                .Sample(this, times, seed), 
+            StandardNormalSampler
+                .Sample<T>(
+                    HashCode
+                        .Combine(
+                            id, 
+                            seed))
+                .ToTrajectory(), 
+            (dt, z) => 
+                dt.Sqrt()
+                    .Multiply(z));
+
+    ITrajectory<T> SampleCorrelated<T>(
+        ICorrelatedWienerStochasticProcess<T> process,
+        ISeq<DateTime> times,
+        int seed)
+        where T : IReal<T>
+    {
+        var w = process
+            .Sample(this, times, seed)
+            .ToSeq();
+        return w.Zip(w.Skip(1))
+            .Select(p => p.Second - p.First)
+            .ToSeq()
+            .ToTrajectory();
+    }
 }

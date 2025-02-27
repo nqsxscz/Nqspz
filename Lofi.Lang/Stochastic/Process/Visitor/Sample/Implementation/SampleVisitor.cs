@@ -6,5 +6,6 @@ namespace Lofi.Lang.Stochastic.Process.Visitor.Sample.Implementation;
 
 internal sealed record SampleVisitor(
     ISampler Sampler, 
-    ISeq<DateTime> Times)
+    ISeq<DateTime> Times,
+    int Seed)
     : ISampleVisitor;

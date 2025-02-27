@@ -19,6 +19,8 @@ public interface ISampleVisitor
     ISampler Sampler { get; }
     
     ISeq<DateTime> Times { get; }
+    
+    int Seed { get; }
 
     ITypeConstructor<ITrajectory, DateTime>
         IStochasticProcessVisitor1<ITrajectory>.Visit(
@@ -27,13 +29,13 @@ public interface ISampleVisitor
 
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
-            IWienerStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+            IStandardWienerStochasticProcess<T> process)
+        => Sampler.Sample(process, Times, Seed);
     
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
             ICorrelatedWienerStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
@@ -43,7 +45,7 @@ public interface ISampleVisitor
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
             IGenericDifferentialStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
@@ -53,25 +55,25 @@ public interface ISampleVisitor
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
             IWienerDifferentialStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
             IOffsetStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T>(
             IItoStochasticProcess<T> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T2> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T1, T2>(
             ISelectStochasticProcess<T1, T2> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 
     ITypeConstructor<ITrajectory, T3> 
         IStochasticProcessVisitor1<ITrajectory>.Visit<T1, T2, T3>(
             ILiftStochasticProcess<T1, T2, T3> process)
-        => Sampler.Sample(process, Times);
+        => Sampler.Sample(process, Times, Seed);
 }

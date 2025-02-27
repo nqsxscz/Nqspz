@@ -10,8 +10,10 @@ public static class StochasticProcessVisitor
     public static IStochasticProcessVisitor1<ITrajectory>
         Sample(
             ISampler sampler, 
-            ISeq<DateTime> times)
+            ISeq<DateTime> times,
+            int seed)
         => new SampleVisitor(
             sampler, 
-            times);
+            times,
+            seed);
 }
