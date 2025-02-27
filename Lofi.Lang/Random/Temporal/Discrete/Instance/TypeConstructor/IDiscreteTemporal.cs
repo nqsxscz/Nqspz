@@ -5,8 +5,10 @@ using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Random.Temporal.Discrete.Instance.TypeConstructor;
 
-public interface IDiscreteTemporal : Trait.IObservable<IDiscreteTemporal>,
-    IApplicative<IDiscreteTemporal>
+public interface IDiscreteTemporal : 
+    IApplicative<IDiscreteTemporal>,
+    IScannable<IDiscreteTemporal>,
+    Trait.IObservable<IDiscreteTemporal>
 {
     static ITypeConstructor<IDiscreteTemporal, T2>
         IFunctor<IDiscreteTemporal>.Select<T1, T2>(
@@ -29,6 +31,17 @@ public interface IDiscreteTemporal : Trait.IObservable<IDiscreteTemporal>,
             left.ToDiscreteTemporal(),
             right.ToDiscreteTemporal(),
             combinator);
+
+    static ITypeConstructor<IDiscreteTemporal, T2>
+        IScannable<IDiscreteTemporal>.ScanRight<T1, T2>(
+            ITypeConstructor<IDiscreteTemporal, T1> operand,
+            T2 init,
+            Func<T1, T2, T2> accumulator)
+        => operand
+            .ToDiscreteTemporal()
+            .ScanRight(
+                init, 
+                accumulator);
 
     static IMaybe<T> Trait.IObservable<IDiscreteTemporal>.Observe<T>(
         ITypeConstructor<IDiscreteTemporal, T> observable,
