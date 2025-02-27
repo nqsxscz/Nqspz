@@ -1,5 +1,4 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Constant;
-using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Correlated;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Differential;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Lift;
@@ -8,14 +7,12 @@ using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Select;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Time;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Algebra.Trait.Additive;
-using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Numeric.Trait;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Model.Random.Process.Visitor;
 
 public interface IContinuousProcessVisitor1<TC>
-    : IPiecewiseConstantProcessVisitor1<TC>
     where TC : notnull
 {
     ITypeConstructor<TC, DateTime> Visit(
@@ -26,12 +23,12 @@ public interface IContinuousProcessVisitor1<TC>
         where T : IReal<T>;
     
     ITypeConstructor<TC, T> Visit<T>(
-        IConstantStochasticProcess<T> process)
-        where T : notnull;
+        ICorrelatedWienerStochasticProcess<T> process)
+        where T : IReal<T>;
     
     ITypeConstructor<TC, T> Visit<T>(
-        ICorrelatedStochasticProcess<T> process)
-        where T : IReal<T>;
+        IConstantStochasticProcess<T> process)
+        where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
         IGenericDifferentialStochasticProcess<T> process)
@@ -42,14 +39,17 @@ public interface IContinuousProcessVisitor1<TC>
         where T : IAdditiveGroup<T>;
     
     ITypeConstructor<TC, T> Visit<T>(
+        IWienerDifferentialStochasticProcess<T> process)
+        where T : IReal<T>;
+    
+    ITypeConstructor<TC, T> Visit<T>(
         IOffsetStochasticProcess<T> process)
         where T : notnull;
     
     ITypeConstructor<TC, T> Visit<T>(
         IItoStochasticProcess<T> process)
         where T : 
-        IAdditiveGroup<T>,
-        IMultiplicativeSemigroup<T>;
+        IReal<T>;
 
     ITypeConstructor<TC, T2> Visit<T1, T2>(
         ISelectStochasticProcess<T1, T2> process)

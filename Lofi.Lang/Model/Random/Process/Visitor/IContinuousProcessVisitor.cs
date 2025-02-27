@@ -1,5 +1,4 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Constant;
-using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Correlated;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Differential;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Lift;
@@ -8,13 +7,11 @@ using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Select;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Time;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Algebra.Trait.Additive;
-using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Model.Random.Process.Visitor;
 
 public interface IContinuousProcessVisitor<out TResult>
-    : IPiecewiseConstantProcessVisitor<TResult>
     where TResult : notnull
 {
     TResult Visit(
@@ -25,12 +22,12 @@ public interface IContinuousProcessVisitor<out TResult>
         where T : IReal<T>;
     
     TResult Visit<T>(
-        IConstantStochasticProcess<T> process)
-        where T : notnull;
+        ICorrelatedWienerStochasticProcess<T> process)
+        where T : IReal<T>;
     
     TResult Visit<T>(
-        ICorrelatedStochasticProcess<T> process)
-        where T : IReal<T>;
+        IConstantStochasticProcess<T> process)
+        where T : notnull;
     
     TResult Visit<T>(
         IGenericDifferentialStochasticProcess<T> process)
@@ -41,14 +38,17 @@ public interface IContinuousProcessVisitor<out TResult>
         where T : IAdditiveGroup<T>;
     
     TResult Visit<T>(
+        IWienerDifferentialStochasticProcess<T> process)
+        where T : IReal<T>;
+    
+    TResult Visit<T>(
         IOffsetStochasticProcess<T> process)
         where T : notnull;
     
     TResult Visit<T>(
         IItoStochasticProcess<T> process)
         where T : 
-        IAdditiveGroup<T>,
-        IMultiplicativeSemigroup<T>;
+        IReal<T>;
 
     TResult Visit<T1, T2>(
         ISelectStochasticProcess<T1, T2> process)

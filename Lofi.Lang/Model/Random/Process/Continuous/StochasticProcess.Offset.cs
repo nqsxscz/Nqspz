@@ -7,11 +7,9 @@ public static partial class StochasticProcess
 {
     public static IStochasticProcess<T> Offset<T>(
         this IStochasticProcess<T> operand,
-        TimeSpan offset,
-        Func<DateTime, TimeSpan, DateTime> offsetter)
+        Func<DateTime, DateTime> offsetter)
         where T : notnull
         => new OffsetStochasticProcess<T>(
             operand, 
-            offset,
             offsetter);
 }

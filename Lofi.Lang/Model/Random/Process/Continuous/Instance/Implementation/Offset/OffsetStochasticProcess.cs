@@ -5,7 +5,6 @@ namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Implementation.Offs
 
 internal sealed record OffsetStochasticProcess<T>(
     IStochasticProcess<T> Operand,
-    TimeSpan Offset,
-    Func<DateTime, TimeSpan, DateTime> Offsetter)
+    Func<DateTime, DateTime> Offsetter)
     : IOffsetStochasticProcess<T>
     where T : notnull;

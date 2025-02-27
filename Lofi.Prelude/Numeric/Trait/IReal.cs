@@ -5,6 +5,8 @@ public interface IReal<T> :
     IRealFunctions<T>
     where T : IReal<T>
 {
+    static abstract T FromDouble(double x);
+    
     static abstract T operator ^(
         T left, 
         T right);

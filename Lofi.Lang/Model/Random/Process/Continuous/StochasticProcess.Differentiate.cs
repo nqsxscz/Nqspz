@@ -1,7 +1,9 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Implementation.Differential;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Differential;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Algebra.Trait.Additive;
+using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Model.Random.Process.Continuous;
 
@@ -13,6 +15,14 @@ public static partial class StochasticProcess
         where T : IAdditiveGroup<T>
         => new TimeDifferentialStochasticProcess<T>(
             operand, 
+            converter);
+
+    public static IDifferentialStochasticProcess<T> Differentiate<T>(
+        this IWienerStochasticProcess<T> operand,
+        Func<TimeSpan, T> converter)
+        where T : IReal<T>
+        => new WienerDifferentialStochasticProcess<T>(
+            operand,
             converter);
     
     public static IDifferentialStochasticProcess<T> Differentiate<T>(

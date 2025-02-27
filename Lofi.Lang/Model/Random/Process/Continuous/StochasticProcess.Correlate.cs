@@ -1,16 +1,29 @@
-using Lofi.Lang.Model.Random.Process.Continuous.Instance.Implementation.Correlated;
-using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Implementation.Wiener;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Model.Random.Process.Continuous;
 
 public static partial class StochasticProcess
 {
-    public static IStochasticProcess<T> Correlate<T>(
-        this IStochasticProcess<T> operand,
-        T correlation)
+    public static ICorrelatedWienerStochasticProcess<T>
+        Correlate<T>(
+            this IWienerStochasticProcess<T> wiener,
+            T correlation)
         where T : IReal<T>
-        => new CorrelatedStochasticProcess<T>(
-            operand, 
+        => wiener
+            .Correlate(
+                Wiener<T>(), 
+                correlation);
+
+    public static ICorrelatedWienerStochasticProcess<T>
+        Correlate<T>(
+            this IWienerStochasticProcess<T> wiener1,
+            IWienerStochasticProcess<T> wiener2,
+            T correlation)
+        where T : IReal<T>
+        => new CorrelatedWienerStochasticProcess<T>(
+            wiener1, 
+            wiener2, 
             correlation);
 }

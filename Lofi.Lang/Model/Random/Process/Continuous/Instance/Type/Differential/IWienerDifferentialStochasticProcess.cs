@@ -1,16 +1,17 @@
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Lang.Model.Random.Process.Visitor;
 using Lofi.Prelude.Numeric.Trait;
 using Lofi.Prelude.Type;
 
-namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Correlated;
+namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Differential;
 
-public interface ICorrelatedStochasticProcess<out T>
-    : IStochasticProcess<T>
+public interface IWienerDifferentialStochasticProcess<out T>
+    : IDifferentialStochasticProcess<T>
     where T : IReal<T>
 {
-    IStochasticProcess<T> Operand { get; }
+    IWienerStochasticProcess<T> Operand { get; }
     
-    T Correlation { get; }
+    Func<TimeSpan, T> Converter { get; }
     
     TResult IStochasticProcess<T>.Accept<TResult>(
         IContinuousProcessVisitor<TResult> visitor)

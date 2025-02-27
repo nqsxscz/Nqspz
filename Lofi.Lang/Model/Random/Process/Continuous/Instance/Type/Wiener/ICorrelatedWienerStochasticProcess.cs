@@ -1,15 +1,18 @@
 using Lofi.Lang.Model.Random.Process.Visitor;
+using Lofi.Prelude.Numeric.Trait;
 using Lofi.Prelude.Type;
 
-namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Offset;
+namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 
-public interface IOffsetStochasticProcess<out T>
-    : IStochasticProcess<T>
-    where T : notnull
+public interface ICorrelatedWienerStochasticProcess<out T>
+    : IWienerStochasticProcess<T>
+    where T : IReal<T>
 {
-    IStochasticProcess<T> Operand { get; }
+    IWienerStochasticProcess<T> Left { get; }
     
-    Func<DateTime, DateTime> Offsetter { get; }
+    IWienerStochasticProcess<T> Right { get; }
+    
+    T Correlation { get; }
     
     TResult IStochasticProcess<T>.Accept<TResult>(
         IContinuousProcessVisitor<TResult> visitor)

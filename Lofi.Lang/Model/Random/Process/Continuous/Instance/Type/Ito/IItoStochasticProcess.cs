@@ -1,6 +1,6 @@
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Lang.Model.Random.Process.Visitor;
-using Lofi.Prelude.Algebra.Trait.Additive;
-using Lofi.Prelude.Algebra.Trait.Multiplicative;
+using Lofi.Prelude.Numeric.Trait;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
@@ -8,8 +8,7 @@ namespace Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Ito;
 public interface IItoStochasticProcess<T>
     : IStochasticProcess<T>
     where T : 
-    IAdditiveGroup<T>,
-    IMultiplicativeSemigroup<T>
+    IReal<T>
 {
     T Init { get; }
     
@@ -23,7 +22,7 @@ public interface IItoStochasticProcess<T>
     
     IStochasticProcess<T> Right { get; }
     
-    IStochasticProcess<T> Wiener { get; }
+    IWienerStochasticProcess<T> Wiener { get; }
     
     TResult IStochasticProcess<T>.Accept<TResult>(
         IContinuousProcessVisitor<TResult> visitor)

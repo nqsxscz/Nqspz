@@ -1,4 +1,5 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Numeric;
 using Lofi.Prelude.Numeric.Trait;
 
@@ -27,7 +28,7 @@ public static partial class StochasticProcess
         T mu,
         T sigma,
         Func<TimeSpan, T> converter,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,

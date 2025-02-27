@@ -1,5 +1,6 @@
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Implementation.Ito;
 using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type;
+using Lofi.Lang.Model.Random.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Model.Random.Process.Continuous;
@@ -12,7 +13,7 @@ public static partial class StochasticProcess
         Func<T, T> drift,
         Func<T, T> volatility,
         Func<TimeSpan, T> converter,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
@@ -30,7 +31,7 @@ public static partial class StochasticProcess
         Func<T, T> volatility,
         Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
@@ -48,7 +49,7 @@ public static partial class StochasticProcess
         Func<T, T, T> volatility,
         Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
@@ -66,7 +67,7 @@ public static partial class StochasticProcess
         Func<T, T, T> volatility,
         Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
@@ -85,7 +86,7 @@ public static partial class StochasticProcess
         Func<TimeSpan, T> converter,
         IStochasticProcess<T> left,
         IStochasticProcess<T> right,
-        IStochasticProcess<T> wiener)
+        IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => new ItoStochasticProcess<T>(
             init, 
