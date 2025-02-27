@@ -7,7 +7,7 @@ public static partial class Temporal
 {
     public static IDiscreteTemporal<T> Log<T>(
         this IDiscreteTemporal<T> operand)
-        where T : IRealFunctions<T>
+        where T : IReal<T>
         => operand
             .Select(
                 T.Log);

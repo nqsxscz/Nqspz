@@ -4,9 +4,7 @@ using Lofi.Prelude.Algebra.Trait.Multiplicative;
 namespace Lofi.Prelude.Numeric.Trait;
 
 public interface IDual<T, TReal> : 
-    IAdditiveGroup<T>,
-    IMultiplicativeGroup<T>, 
-    IRealFunctions<T>
+    IReal<T>
     where T : IDual<T, TReal>
     where TReal : IReal<TReal>
 {
@@ -17,11 +15,22 @@ public interface IDual<T, TReal> :
     static abstract T Of(
         TReal real, 
         TReal dual);
+
+    static virtual T FromReal(TReal real)
+        => T.Of(
+            real, 
+            TReal.Zero);
     
     static T IAdditiveSemigroup<T>.operator +(T left, T right)
-        => T.Of(
-            T.Real(left) + T.Real(right), 
-            T.Dual(left) + T.Dual(right));
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var up = T.Dual(left);
+        var vp = T.Dual(right);
+        var l = u + v;
+        var r = up + vp;
+        return T.Of(l, r);
+    }
     
     static T IAdditiveMonoid<T>.Zero
         => T.Of(
@@ -29,14 +38,26 @@ public interface IDual<T, TReal> :
             TReal.Zero);
     
     static T IAdditiveGroup<T>.operator -(T left, T right)
-        => T.Of(
-            T.Real(left) - T.Real(right), 
-            T.Dual(left) - T.Dual(right));
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var up = T.Dual(left);
+        var vp = T.Dual(right);
+        var l = u - v;
+        var r = up - vp;
+        return T.Of(l, r);
+    }
     
     static T IMultiplicativeSemigroup<T>.operator *(T left, T right)
-        => T.Of(
-            T.Real(left) * T.Real(right), 
-            T.Dual(left) * T.Real(right) + T.Real(left) * T.Dual(right));
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var up = T.Dual(left);
+        var vp = T.Dual(right);
+        var l = u * v;
+        var r = up*v + u*vp;
+        return T.Of(l, r);
+    }
     
     static T IMultiplicativeMonoid<T>.One
         => T.Of(
@@ -44,58 +65,117 @@ public interface IDual<T, TReal> :
             TReal.Zero);
     
     static T IMultiplicativeGroup<T>.operator /(T left, T right)
-        => T.Of(
-            T.Real(left) / T.Real(right), 
-            (T.Dual(left) * T.Real(right) - T.Real(left) * T.Dual(right)) / (T.Real(right) * T.Real(right)));
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var up = T.Dual(left);
+        var vp = T.Dual(right);
+        var l = u / v;
+        var r = (up*v - u*vp) / (v*v);
+        return T.Of(l, r);
+    }
+
+    static T IReal<T>.FromDouble(double x)
+        => T.FromReal(
+            TReal.FromDouble(x));
     
-    static T IRealFunctions<T>.Pi
+    static T IReal<T>.Pi
         => T.Of(TReal.Pi, TReal.Zero);
     
-    static T IRealFunctions<T>.E
+    static T IReal<T>.E
         => T.Of(TReal.E, TReal.Zero);
     
-    static T IRealFunctions<T>.Sqrt(T t)
-        => T.Of(
-            TReal.Sqrt(T.Real(t)), 
-            T.Dual(t) / ((TReal.One + TReal.One)*TReal.Sqrt(T.Real(t))));
+    static T IReal<T>.Sqrt(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Sqrt();
+        var r = up / ((TReal.One + TReal.One)*u.Sqrt());
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Log(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Log();
+        var r = up / u;
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Exp(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Exp();
+        var r = up * u.Exp();
+        return T.Of(l, r);
+    }
 
-    static T IRealFunctions<T>.Log(T t)
-        => T.Of(
-            TReal.Log(T.Real(t)),
-            T.Dual(t) / T.Real(t));
+    static T IReal<T>.Sin(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Sin();
+        var r = up * u.Cos();
+        return T.Of(l, r);
+    }
     
-    static T IRealFunctions<T>.Exp(T t)
-        => T.Of(
-            TReal.Exp(T.Real(t)),
-            T.Dual(t) * TReal.Exp(T.Real(t)));
+    static T IReal<T>.Cos(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Cos();
+        var r = -up * u.Sin();
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Tan(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Tan();
+        var r = up / (u.Cos()*u.Cos());
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Asin(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Asin();
+        var r = up / (TReal.One - u*u).Sqrt();
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Acos(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Acos();
+        var r = -up / (TReal.One - u*u).Sqrt();
+        return T.Of(l, r);
+    }
+    
+    static T IReal<T>.Atan(T t)
+    {
+        var u = T.Real(t);
+        var up = T.Dual(t);
+        var l = u.Atan();
+        var r = up / (TReal.One + u*u);
+        return T.Of(l, r);
+    }
 
-    static T IRealFunctions<T>.Sin(T t)
-        => T.Of(
-            TReal.Sin(T.Real(t)),
-            T.Dual(t) * TReal.Cos(T.Real(t)));
-    
-    static T IRealFunctions<T>.Cos(T t)
-        => T.Of(
-            TReal.Cos(T.Real(t)),
-            -T.Dual(t) * TReal.Sin(T.Real(t)));
-    
-    static T IRealFunctions<T>.Tan(T t)
-        => T.Of(
-            TReal.Tan(T.Real(t)),
-            T.Dual(t) / (TReal.Cos(T.Real(t)) * TReal.Cos(T.Real(t))));
-    
-    static T IRealFunctions<T>.Asin(T t)
-        => T.Of(
-            TReal.Asin(T.Real(t)),
-            T.Dual(t) / (TReal.One - T.Real(t)*T.Real(t)).Sqrt());
-    
-    static T IRealFunctions<T>.Acos(T t)
-        => T.Of(
-            TReal.Acos(T.Real(t)),
-            -T.Dual(t) / (TReal.One - T.Real(t)*T.Real(t)).Sqrt());
-    
-    static T IRealFunctions<T>.Atan(T t)
-        => T.Of(
-            TReal.Acos(T.Real(t)),
-            T.Dual(t) / (TReal.One + T.Real(t)*T.Real(t)));
+    static T IReal<T>.operator ^(T left, T right)
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var up = T.Dual(left);
+        var vp = T.Dual(right);
+        var l = u ^ v;
+        var r = 
+            up * v * (u ^ (v - TReal.One))
+            + u.Log()*u*v*vp;
+        return T.Of(l, r);
+    }
 }

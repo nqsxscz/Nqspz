@@ -6,7 +6,7 @@ namespace Lofi.Lang.Random.Temporal.Discrete;
 public static partial class Temporal
 {
     public static IDiscreteTemporal<T> Pi<T>()
-        where T : IRealFunctions<T>
+        where T : IReal<T>
         => T.Pi
             .ToDiscreteTemporal();
 }

@@ -6,7 +6,7 @@ namespace Lofi.Lang.Random.Temporal.Continuous;
 public static partial class Temporal
 {
     public static ITemporal<T> E<T>()
-        where T : IRealFunctions<T>
+        where T : IReal<T>
         => T.E
             .ToTemporal();
 }
