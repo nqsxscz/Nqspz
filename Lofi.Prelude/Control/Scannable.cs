@@ -4,7 +4,7 @@ using Lofi.Prelude.Algebra.Trait.Additive;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Control.Trait;
 using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Instance.Maybe.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Prelude.Control;
@@ -210,21 +210,45 @@ public static class Scannable
             (t, m) =>
                 TM.Combine(accumulator(t), m));
 
-    public static ITypeConstructor<TC, ISeq<T>> Enumerate<TC, T>(
-        this ITypeConstructor<TC, T> operand)
+    public static ITypeConstructor<TC, bool> Any<TC, T>(
+        this ITypeConstructor<TC, T> operand,
+        Func<T, bool> predicate)
         where TC : IScannable<TC>
         where T : notnull
         => operand.ScanRight(
-            Seq.Empty<T>(),
-            (t, ts) => ts.Append(t));
-
-    public static ITypeConstructor<TC, bool> IsEmpty<TC, T>(
-        this ITypeConstructor<TC, T> operand)
+            false,
+            (t, p) => p || predicate(t));
+    
+    public static ITypeConstructor<TC, bool> All<TC, T>(
+        this ITypeConstructor<TC, T> operand,
+        Func<T, bool> predicate)
         where TC : IScannable<TC>
         where T : notnull
         => operand.ScanRight(
             true,
-            (_, _) => true);
+            (t, p) => p && predicate(t));
+    
+    public static ITypeConstructor<TC, bool> Contains<TC, T>(
+        this ITypeConstructor<TC, T> operand,
+        T item)
+        where TC : IScannable<TC>
+        where T : notnull
+        => operand
+            .Any(t => t.Equals(item));
+    
+    public static ITypeConstructor<TC, bool> And<TC>(
+        this ITypeConstructor<TC, bool> operand)
+        where TC : IScannable<TC>
+        => operand.ScanRight(
+            true,
+            (t, p) => p && t);
+    
+    public static ITypeConstructor<TC, bool> Or<TC>(
+        this ITypeConstructor<TC, bool> operand)
+        where TC : IScannable<TC>
+        => operand.ScanRight(
+            false,
+            (t, p) => p || t);
 
     public static ITypeConstructor<TC, int> Length<TC, T>(
         this ITypeConstructor<TC, T> operand)
@@ -233,16 +257,7 @@ public static class Scannable
         => operand.ScanRight(
             0,
             (_, i) => i + 1);
-
-    public static ITypeConstructor<TC, bool> Contains<TC, T>(
-        this ITypeConstructor<TC, T> operand,
-        T item)
-        where TC : IScannable<TC>
-        where T : notnull
-        => operand.ScanRight(
-            false,
-            (t, found) => found || t.Equals(item));
-
+    
     public static ITypeConstructor<TC, T> Minimum<TC, T>(
         this ITypeConstructor<TC, T> operand)
         where TC : IScannable<TC>
@@ -280,4 +295,26 @@ public static class Scannable
         => operand.ScanRight(
             T.One,
             Semigroup.Multiply);
+    
+    public static ITypeConstructor<TC, IMaybe<T>> Find<TC, T>(
+        this ITypeConstructor<TC, T> operand,
+        Func<T, bool> predicate)
+        where TC : IScannable<TC>
+        where T : notnull
+        => operand.ScanRight(
+            Maybe.Nothing<T>(),
+            (t, p) => 
+                p.OrElse(t)
+                    .ToMaybe());
+
+    public static IMaybe<ITypeConstructor<TC, T>> Where<TC, T>(
+        this ITypeConstructor<TC, T> operand,
+        Func<T, bool> predicate)
+        where TC :
+        IScannable<TC>,
+        ITraversable<TC>
+        where T : notnull
+        => Find(operand, predicate)
+            .Sequence()
+            .ToMaybe();
 }
