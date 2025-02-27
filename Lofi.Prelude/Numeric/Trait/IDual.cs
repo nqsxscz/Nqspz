@@ -1,3 +1,4 @@
+using Lofi.Prelude.Algebra;
 using Lofi.Prelude.Algebra.Trait.Additive;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
 
@@ -33,9 +34,7 @@ public interface IDual<T, TReal> :
     }
     
     static T IAdditiveMonoid<T>.Zero
-        => T.Of(
-            TReal.Zero, 
-            TReal.Zero);
+        => T.FromReal(TReal.Zero);
     
     static T IAdditiveGroup<T>.operator -(T left, T right)
     {
@@ -60,9 +59,7 @@ public interface IDual<T, TReal> :
     }
     
     static T IMultiplicativeMonoid<T>.One
-        => T.Of(
-            TReal.One, 
-            TReal.Zero);
+        => T.FromReal(TReal.One);
     
     static T IMultiplicativeGroup<T>.operator /(T left, T right)
     {
@@ -71,7 +68,7 @@ public interface IDual<T, TReal> :
         var up = T.Dual(left);
         var vp = T.Dual(right);
         var l = u / v;
-        var r = (up*v - u*vp) / (v*v);
+        var r = (up*v - u*vp) / v.Square();
         return T.Of(l, r);
     }
 
@@ -80,17 +77,17 @@ public interface IDual<T, TReal> :
             TReal.FromDouble(x));
     
     static T IReal<T>.Pi
-        => T.Of(TReal.Pi, TReal.Zero);
+        => T.FromReal(TReal.Pi);
     
     static T IReal<T>.E
-        => T.Of(TReal.E, TReal.Zero);
+        => T.FromReal(TReal.E);
     
     static T IReal<T>.Sqrt(T t)
     {
         var u = T.Real(t);
         var up = T.Dual(t);
         var l = u.Sqrt();
-        var r = up / ((TReal.One + TReal.One)*u.Sqrt());
+        var r = up / (TReal.Two*u.Sqrt());
         return T.Of(l, r);
     }
     
@@ -135,7 +132,7 @@ public interface IDual<T, TReal> :
         var u = T.Real(t);
         var up = T.Dual(t);
         var l = u.Tan();
-        var r = up / (u.Cos()*u.Cos());
+        var r = up / u.Cos().Square();
         return T.Of(l, r);
     }
     
@@ -144,7 +141,7 @@ public interface IDual<T, TReal> :
         var u = T.Real(t);
         var up = T.Dual(t);
         var l = u.Asin();
-        var r = up / (TReal.One - u*u).Sqrt();
+        var r = up / (TReal.One - u.Square()).Sqrt();
         return T.Of(l, r);
     }
     
@@ -153,7 +150,7 @@ public interface IDual<T, TReal> :
         var u = T.Real(t);
         var up = T.Dual(t);
         var l = u.Acos();
-        var r = -up / (TReal.One - u*u).Sqrt();
+        var r = -up / (TReal.One - u.Square()).Sqrt();
         return T.Of(l, r);
     }
     
@@ -162,7 +159,7 @@ public interface IDual<T, TReal> :
         var u = T.Real(t);
         var up = T.Dual(t);
         var l = u.Atan();
-        var r = up / (TReal.One + u*u);
+        var r = up / (TReal.One + u.Square());
         return T.Of(l, r);
     }
 

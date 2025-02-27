@@ -31,4 +31,7 @@ public interface IReal<T>
     static abstract T operator ^(
         T left, 
         T right);
+
+    static T INatural<T>.FromInt(int n)
+        => T.FromDouble(n);
 }

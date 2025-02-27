@@ -17,4 +17,8 @@ public static class Semigroup
     public static T Multiply<T>(this T left, T right)
         where T : IMultiplicativeSemigroup<T>
         => left * right;
+    
+    public static T Square<T>(this T t)
+        where T : IMultiplicativeSemigroup<T>
+        => t * t;
 }
