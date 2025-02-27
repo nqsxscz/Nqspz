@@ -17,6 +17,8 @@ using MathNet.Numerics.Distributions;
 
 namespace Lofi.Lang.Stochastic.Sample.Type;
 
+using Scannable = Prelude.Control.Scannable;
+
 public interface IDefaultSampler
     : ISampler
 {
@@ -28,12 +30,14 @@ public interface IDefaultSampler
     ITrajectory<T> ISampler.Sample<T>(
         IWienerStochasticProcess<T> process,
         ISeq<DateTime> times)
-        => process
-            .Differentiate()
-            .Sample(this, times)
+        => Scannable
             .ScanLeft(
+                process
+                    .Differentiate()
+                    .Sample(this, times), 
                 T.Zero, 
-                Semigroup.Add);
+                Semigroup.Add)
+            .ToTrajectory();
 
     ITrajectory<T> ISampler.Sample<T>(
         ICorrelatedWienerStochasticProcess<T> process,
@@ -143,7 +147,7 @@ public interface IDefaultSampler
                 .Right
                 .Sample(this, times);
 
-        return RandomTrajectory
+        return Scannable
             .ScanLeft(
                 dt, 
                 dwt, 
@@ -152,7 +156,8 @@ public interface IDefaultSampler
                 process.Init, 
                 (su, du, dwu, au, bu) => 
                     process.Drift(su, au) * du 
-                    + process.Volatility(su, bu) * dwu);
+                    + process.Volatility(su, bu) * dwu)
+            .ToTrajectory();
     }
 
     ITrajectory<T2> ISampler.Sample<T1, T2>(
