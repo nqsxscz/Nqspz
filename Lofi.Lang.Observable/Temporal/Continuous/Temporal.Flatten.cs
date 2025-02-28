@@ -1,6 +1,6 @@
 using Lofi.Lang.Observable.Temporal.Continuous.Instance.Implementation;
 using Lofi.Lang.Observable.Temporal.Continuous.Instance.Type;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Observable.Temporal.Continuous;
 

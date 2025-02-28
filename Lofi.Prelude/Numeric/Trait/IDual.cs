@@ -1,4 +1,5 @@
 using Lofi.Prelude.Algebra;
+using Lofi.Prelude.Algebra.Trait;
 using Lofi.Prelude.Algebra.Trait.Additive;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Type.Constant;
@@ -13,17 +14,17 @@ public interface IDual<T, TReal, TNumber> :
 {
     static abstract TReal Real(T t);
 
-    static abstract TReal[] Dual(T t);
+    static abstract TReal[] Duals(T t);
 
     static abstract T Of(
         TReal real, 
         TReal[] dual);
     
-    static abstract T Variable(
+    static abstract T ToVariable(
         TReal real, 
         int i);
     
-    static virtual T Constant(
+    static virtual T ToConstant(
         TReal real)
         => T.Of(
             real, 
@@ -34,43 +35,30 @@ public interface IDual<T, TReal, TNumber> :
                 .ToArray());
     
     static T IReal<T>.FromDouble(double x)
-        => T.Constant(
+        => T.ToConstant(
             TReal.FromDouble(x));
     
     static T IAdditiveMonoid<T>.Zero
-        => T.Constant(TReal.Zero);
+        => T.ToConstant(TReal.Zero);
     
     static T IMultiplicativeMonoid<T>.One
-        => T.Constant(TReal.One);
+        => T.ToConstant(TReal.One);
     
     static T IReal<T>.Pi
-        => T.Constant(TReal.Pi);
+        => T.ToConstant(TReal.Pi);
     
     static T IReal<T>.E
-        => T.Constant(TReal.E);
+        => T.ToConstant(TReal.E);
     
     static T IAdditiveSemigroup<T>.operator +(T left, T right)
     {
         var u = T.Real(left);
         var v = T.Real(right);
-        var ups = T.Dual(left);
-        var vps = T.Dual(right);
+        var ups = T.Duals(left);
+        var vps = T.Duals(right);
         var x = u + v;
         var ys = ups
             .Zip(vps, Semigroup.Add)
-            .ToArray();
-        return T.Of(x, ys);
-    }
-    
-    static T IAdditiveGroup<T>.operator -(T left, T right)
-    {
-        var u = T.Real(left);
-        var v = T.Real(right);
-        var ups = T.Dual(left);
-        var vps = T.Dual(right);
-        var x = u - v;
-        var ys = ups
-            .Zip(vps, Group.Subtract)
             .ToArray();
         return T.Of(x, ys);
     }
@@ -79,8 +67,8 @@ public interface IDual<T, TReal, TNumber> :
     {
         var u = T.Real(left);
         var v = T.Real(right);
-        var ups = T.Dual(left);
-        var vps = T.Dual(right);
+        var ups = T.Duals(left);
+        var vps = T.Duals(right);
         var x = u * v;
         var ys = ups
             .Zip(vps, (up, vp) =>
@@ -89,17 +77,42 @@ public interface IDual<T, TReal, TNumber> :
         return T.Of(x, ys);
     }
     
-    static T IMultiplicativeGroup<T>.operator /(T left, T right)
+    static T IReal<T>.operator ^(T left, T right)
     {
         var u = T.Real(left);
         var v = T.Real(right);
-        var invDenominator = v.Square().Invert();
-        var ups = T.Dual(left);
-        var vps = T.Dual(right);
-        var x = u / v;
+        var ups = T.Duals(left);
+        var vps = T.Duals(right);
+        var l = v * (u ^ (v - TReal.One));
+        var r = u.Log() * u * v;
+        var x = u ^ v;
         var ys = ups
             .Zip(vps, (up, vp) =>
-                (up*v - u*vp) * invDenominator)
+                up * l + vp * r)
+            .ToArray();
+        return T.Of(x, ys);
+    }
+    
+    static T IAdditiveGroup<T>.operator -(T operand)
+    {
+        var u = T.Real(operand);
+        var ups = T.Duals(operand);
+        var x = -u;
+        var ys = ups
+            .Select(Group.Negate)
+            .ToArray();
+        return T.Of(x, ys);
+    }
+    
+    static T IMultiplicativeGroup<T>.Invert(T operand)
+    {
+        var u = T.Real(operand);
+        var ups = T.Duals(operand);
+        var x = u.Invert();
+        var invDenominator = x * x;
+        var ys = ups
+            .Select(up =>
+                -up * invDenominator)
             .ToArray();
         return T.Of(x, ys);
     }
@@ -107,9 +120,9 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Sqrt(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var x = u.Sqrt();
-        var invDenominator = (TReal.Two*x).Invert();
+        var invDenominator = (TReal.Two*x).Reciprocate();
         var ys = ups
             .Select(up =>
                 up * invDenominator)
@@ -120,8 +133,8 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Log(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
-        var invDenominator = u.Invert();
+        var ups = T.Duals(t);
+        var invDenominator = u.Reciprocate();
         var x = u.Log();
         var ys = ups
             .Select(up =>
@@ -133,7 +146,7 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Exp(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var x = u.Exp();
         var ys = ups
             .Select(up =>
@@ -145,7 +158,7 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Sin(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var cosu = u.Cos();
         var x = u.Sin();
         var ys = ups
@@ -158,7 +171,7 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Cos(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var sinu = u.Sin();
         var x = u.Cos();
         var ys = ups
@@ -171,11 +184,11 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Tan(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var invDenominator = 
             u.Cos()
                 .Square()
-                .Invert();
+                .Reciprocate();
         var x = u.Tan();
         var ys = ups
             .Select(up =>
@@ -187,11 +200,11 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Asin(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var invDenominator = 
             (TReal.One - u.Square())
             .Sqrt()
-            .Invert();
+            .Reciprocate();
         var x = u.Asin();
         var ys = ups
             .Select(up =>
@@ -203,11 +216,11 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Acos(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var invDenominator = 
             (TReal.One - u.Square())
             .Sqrt()
-            .Invert();
+            .Reciprocate();
         var x = u.Acos();
         var ys = ups
             .Select(up =>
@@ -219,10 +232,10 @@ public interface IDual<T, TReal, TNumber> :
     static T IReal<T>.Atan(T t)
     {
         var u = T.Real(t);
-        var ups = T.Dual(t);
+        var ups = T.Duals(t);
         var invDenominator = 
             (TReal.One + u.Square())
-            .Invert();
+            .Reciprocate();
         var x = u.Atan();
         var ys = ups
             .Select(up =>
@@ -230,19 +243,41 @@ public interface IDual<T, TReal, TNumber> :
             .ToArray();
         return T.Of(x, ys);
     }
-
-    static T IReal<T>.operator ^(T left, T right)
+    
+    static bool IOrderable<T>.operator <(T left, T right)
+        => T.Real(left) < T.Real(right);
+    
+    static bool IOrderable<T>.operator >(T left, T right)
+        => right < left;
+    
+    static T IOrderable<T>.Minimum(T left, T right)
     {
         var u = T.Real(left);
         var v = T.Real(right);
-        var ups = T.Dual(left);
-        var vps = T.Dual(right);
-        var l = v * (u ^ (v - TReal.One));
-        var r = u.Log() * u * v;
-        var x = u ^ v;
+        var ups = T.Duals(left);
+        var vps = T.Duals(right);
+        var gu = u < v ? TReal.One : TReal.Zero;
+        var gv = u < v ? TReal.Zero : TReal.One;
+        var x = TReal.Minimum(u, v);
         var ys = ups
             .Zip(vps, (up, vp) =>
-                up * l + vp * r)
+                up * gu + vp * gv)
+            .ToArray();
+        return T.Of(x, ys);
+    }
+    
+    static T IOrderable<T>.Maximum(T left, T right)
+    {
+        var u = T.Real(left);
+        var v = T.Real(right);
+        var ups = T.Duals(left);
+        var vps = T.Duals(right);
+        var gu = u >= v ? TReal.One : TReal.Zero;
+        var gv = u >= v ? TReal.Zero : TReal.One;
+        var x = TReal.Maximum(u, v);
+        var ys = ups
+            .Zip(vps, (up, vp) =>
+                up * gu + vp * gv)
             .ToArray();
         return T.Of(x, ys);
     }

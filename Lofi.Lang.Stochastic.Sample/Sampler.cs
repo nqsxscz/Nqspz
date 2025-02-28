@@ -3,7 +3,7 @@ using Lofi.Lang.Stochastic.Sample.Type;
 using Lofi.Lang.Stochastic.Sample.Visitor;
 using Lofi.Lang.Stochastic.Trajectory;
 using Lofi.Lang.Stochastic.Trajectory.Type;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 
 namespace Lofi.Lang.Stochastic.Sample;
 

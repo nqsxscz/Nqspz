@@ -5,12 +5,12 @@ namespace Lofi.Prelude.Algebra;
 public static class Orderable
 {
     public static bool Eq<T>(this T left, T right) 
-        where T : notnull
-        => left.Equals(right);
+        where T : IOrderable<T>
+        => left == right;
     
     public static bool Neq<T>(this T left, T right) 
-        where T : notnull
-        => !left.Eq(right);
+        where T : IOrderable<T>
+        => left != right;
     
     public static bool Lt<T>(this T left, T right) 
         where T : IOrderable<T>

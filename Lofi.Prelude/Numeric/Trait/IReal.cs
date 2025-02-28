@@ -1,7 +1,10 @@
+using Lofi.Prelude.Algebra.Trait;
+
 namespace Lofi.Prelude.Numeric.Trait;
 
-public interface IReal<T>
-    : INatural<T>
+public interface IReal<T> : 
+    INatural<T>,
+    IField<T>
     where T : IReal<T>
 {
     static abstract T FromDouble(double x);

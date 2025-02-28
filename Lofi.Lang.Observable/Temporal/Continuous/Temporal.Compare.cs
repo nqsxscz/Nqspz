@@ -9,7 +9,7 @@ public static partial class Temporal
     public static ITemporal<bool> Eq<T>(this 
         ITemporal<T> left, 
         ITemporal<T> right)
-        where T : notnull
+        where T : IOrderable<T>
         => Lift(
             left, 
             right, 
@@ -18,7 +18,7 @@ public static partial class Temporal
     public static ITemporal<bool> Neq<T>(this 
         ITemporal<T> left, 
         ITemporal<T> right)
-        where T : notnull
+        where T : IOrderable<T>
         => Lift(
             left, 
             right, 

@@ -1,7 +1,7 @@
 using Lofi.Lang.Observable.Event.Set.Instance.Operator;
 using Lofi.Lang.Observable.Event.Set.Instance.Type;
 using Lofi.Prelude.Control;
-using Lofi.Prelude.Data;
+using Lofi.Prelude.Data.Control;
 
 namespace Lofi.Lang.Observable.Event.Set;
 

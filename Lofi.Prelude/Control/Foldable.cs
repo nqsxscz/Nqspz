@@ -3,9 +3,10 @@ using Lofi.Prelude.Algebra.Trait;
 using Lofi.Prelude.Algebra.Trait.Additive;
 using Lofi.Prelude.Algebra.Trait.Multiplicative;
 using Lofi.Prelude.Control.Trait;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
+using Lofi.Prelude.Data.Utils;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Prelude.Control;

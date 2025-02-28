@@ -7,13 +7,17 @@ namespace Lofi.Prelude.Algebra;
 
 public static class Group
 {
-    public static T Invert<T>(this T t)
+    public static T Reciprocate<T>(this T t)
         where T : IGroup<T>
-        => T.Invert(t);
+        => T.Reciprocate(t);
     
     public static T Negate<T>(this T t)
         where T : IAdditiveGroup<T>
         => -t;
+    
+    public static T Invert<T>(this T t)
+        where T : IMultiplicativeGroup<T>
+        => T.Invert(t);
 
     public static T Abs<T>(this T t)
         where T :

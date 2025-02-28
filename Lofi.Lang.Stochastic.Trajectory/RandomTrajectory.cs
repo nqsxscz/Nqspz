@@ -1,7 +1,7 @@
 using Lofi.Lang.Stochastic.Trajectory.Type;
 using Lofi.Lang.Stochastic.Trajectory.TypeConstructor;
 using Lofi.Prelude.Control.Trait;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Stochastic.Trajectory;

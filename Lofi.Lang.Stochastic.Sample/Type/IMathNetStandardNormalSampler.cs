@@ -1,7 +1,7 @@
 using MathNet.Numerics.Distributions;
 
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 
 namespace Lofi.Lang.Stochastic.Sample.Type;
 

@@ -1,9 +1,17 @@
+using Lofi.Prelude.Data.Numeric.Instance;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Prelude.Numeric;
 
 public static class Real
 {
+    public static RealNumber ToReal(this double x)
+        => x.ToReal<RealNumber>();
+    
+    public static T ToReal<T>(this double x)
+        where T : IReal<T>
+        => T.FromDouble(x);
+    
     public static T Pi<T>()
         where T : IReal<T>
         => T.Pi;

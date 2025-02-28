@@ -1,4 +1,4 @@
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
 
 namespace Lofi.Supplier;
 

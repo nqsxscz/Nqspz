@@ -2,8 +2,9 @@ using Lofi.Lang.Observable.Event.Set;
 using Lofi.Lang.Observable.Temporal.Continuous;
 using Lofi.Lang.Observable.Temporal.Discrete.Instance.Type;
 using Lofi.Prelude.Algebra.Trait;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Utils;
 
 namespace Lofi.Lang.Observable.Temporal.Discrete;
 

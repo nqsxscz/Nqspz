@@ -1,7 +1,7 @@
 using Lofi.Lang.Observable.Temporal.Continuous.Instance.Type;
 using Lofi.Lang.Observable.Temporal.Visitor;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Observable.Temporal.Continuous;
 

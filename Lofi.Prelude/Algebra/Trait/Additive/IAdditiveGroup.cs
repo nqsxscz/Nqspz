@@ -10,6 +10,6 @@ public interface IAdditiveGroup<T> :
     static virtual T operator -(T left, T right)
         => left + -right;
     
-    static T IGroup<T>.Invert(T operand)
+    static T IGroup<T>.Reciprocate(T operand)
         => -operand;
 }

@@ -1,7 +1,7 @@
 using Lofi.Lang.Observable.Event.Set.Instance.Type;
 using Lofi.Lang.Observable.Temporal.Visitor.EventSet.Implementation;
 using Lofi.Lang.Observable.Temporal.Visitor.Observe.Implementation;
-using Lofi.Prelude.Data.Instance.Maybe.TypeConstructor;
+using Lofi.Prelude.Data.Control.Instance.Maybe.TypeConstructor;
 
 namespace Lofi.Lang.Observable.Temporal.Visitor;
 

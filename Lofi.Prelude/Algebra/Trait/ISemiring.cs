@@ -8,6 +8,12 @@ public interface ISemiring<T> :
     IMultiplicativeMonoid<T>
     where T : ISemiring<T>
 {
+    static T IMonoid<T>.Identity
+        => T.Zero;
+
+    static T ISemigroup<T>.Combine(T left, T right)
+        => left + right;
+    
     static virtual T Two
         => T.Successor(T.One);
     

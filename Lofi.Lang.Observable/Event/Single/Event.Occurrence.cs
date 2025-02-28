@@ -3,8 +3,8 @@ using Lofi.Lang.Observable.Event.Single.Instance.Type;
 using Lofi.Lang.Observable.Temporal.Continuous;
 using Lofi.Lang.Observable.Temporal.Discrete;
 using Lofi.Prelude.Control;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Maybe.Type;
 
 namespace Lofi.Lang.Observable.Event.Single;
 

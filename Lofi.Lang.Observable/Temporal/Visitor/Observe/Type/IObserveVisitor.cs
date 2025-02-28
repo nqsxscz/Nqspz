@@ -4,8 +4,8 @@ using Lofi.Lang.Observable.Temporal.Continuous.Instance.Type;
 using Lofi.Lang.Observable.Temporal.Discrete;
 using Lofi.Lang.Observable.Temporal.Discrete.Instance.Type;
 using Lofi.Prelude.Control;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Maybe.TypeConstructor;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Maybe.TypeConstructor;
 using Lofi.Prelude.Type;
 using Lofi.Supplier;
 

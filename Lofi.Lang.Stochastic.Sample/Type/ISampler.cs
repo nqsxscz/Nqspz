@@ -11,8 +11,8 @@ using Lofi.Lang.Stochastic.Trajectory;
 using Lofi.Lang.Stochastic.Trajectory.Type;
 using Lofi.Prelude.Algebra;
 using Lofi.Prelude.Algebra.Trait.Additive;
-using Lofi.Prelude.Data;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 using Lofi.Prelude.Numeric;
 using Lofi.Prelude.Numeric.Trait;
 

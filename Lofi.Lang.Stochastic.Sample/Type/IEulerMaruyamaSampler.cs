@@ -2,7 +2,7 @@ using Lofi.Lang.Stochastic.Process.Continuous;
 using Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Ito;
 using Lofi.Lang.Stochastic.Trajectory;
 using Lofi.Lang.Stochastic.Trajectory.Type;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 
 namespace Lofi.Lang.Stochastic.Sample.Type;
 

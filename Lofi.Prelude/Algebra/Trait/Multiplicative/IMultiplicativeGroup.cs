@@ -7,6 +7,11 @@ public interface IMultiplicativeGroup<T> :
     IGroup<T>
     where T : IMultiplicativeGroup<T>
 {
+    static abstract T Invert(T operand);
+    
+    static T IGroup<T>.Reciprocate(T operand)
+        => T.Invert(operand);
+    
     static virtual T operator /(T left, T right)
         => left * T.Invert(right);
     
@@ -18,7 +23,7 @@ public interface IMultiplicativeGroup<T> :
             T.Power1(left, right) 
             : 
             T.Power1(left, right)
-                .Invert();
+                .Reciprocate();
     
     protected static virtual T Power1<TNatural>(
         T left, 

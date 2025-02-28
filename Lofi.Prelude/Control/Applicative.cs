@@ -1,5 +1,5 @@
 using Lofi.Prelude.Control.Trait;
-using Lofi.Prelude.Data;
+using Lofi.Prelude.Data.Utils;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Prelude.Control;

@@ -9,7 +9,7 @@ using Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Wiener;
 using Lofi.Lang.Stochastic.Process.Visitor;
 using Lofi.Lang.Stochastic.Sample.Type;
 using Lofi.Lang.Stochastic.Trajectory.TypeConstructor;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 using Lofi.Prelude.Type;
 
 namespace Lofi.Lang.Stochastic.Sample.Visitor.Type;

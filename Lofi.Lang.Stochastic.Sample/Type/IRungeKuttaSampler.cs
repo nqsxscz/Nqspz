@@ -3,7 +3,7 @@ using Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Ito;
 using Lofi.Lang.Stochastic.Trajectory;
 using Lofi.Lang.Stochastic.Trajectory.Type;
 using Lofi.Prelude.Algebra;
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 using Lofi.Prelude.Numeric;
 using Lofi.Prelude.Numeric.Trait;
 
@@ -78,7 +78,7 @@ public interface IRungeKuttaSampler
             su
             + drift(su, au) * du
             + volatility(su, bu) * dwu
-            + T.Two.Invert() * (drift(sbaru, au) - drift(su, au)) * (dwu.Square() - du) / du.Sqrt();
+            + T.Two.Reciprocate() * (drift(sbaru, au) - drift(su, au)) * (dwu.Square() - du) / du.Sqrt();
         return next;
     }
 }

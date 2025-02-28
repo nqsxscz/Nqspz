@@ -1,5 +1,5 @@
 using Lofi.Lang.Observable.Event.Single.Instance.Type;
-using Lofi.Prelude.Data;
+using Lofi.Prelude.Data.Control;
 
 namespace Lofi.Lang.Observable.Event.Single;
 

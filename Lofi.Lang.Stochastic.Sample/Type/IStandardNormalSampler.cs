@@ -1,4 +1,4 @@
-using Lofi.Prelude.Data.Instance.Seq.Type;
+using Lofi.Prelude.Data.Control.Instance.Seq.Type;
 using Lofi.Prelude.Numeric.Trait;
 
 namespace Lofi.Lang.Stochastic.Sample.Type;
