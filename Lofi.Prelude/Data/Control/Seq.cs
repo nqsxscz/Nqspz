@@ -17,7 +17,6 @@ public static class Seq
         where T : notnull
         => Empty<T>()
             .Append(t);
-
     
     public static ISeq<T> ToSeq<T>(this T t)
         where T : notnull
@@ -30,6 +29,9 @@ public static class Seq
             ISeq<T> seq => seq,
             _ => new Seq<T>(ts)
         };
+
+    public static ISeq<T> ToSeq<T>(this ICollection<T> ts)
+        => ToSeq((IEnumerable<T>) ts);
     
     public static ISeq<T> ToSeq<T>(
         this ITypeConstructor<ISeq, T> seq)

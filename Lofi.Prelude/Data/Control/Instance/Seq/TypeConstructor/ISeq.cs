@@ -7,6 +7,7 @@ namespace Lofi.Prelude.Data.Control.Instance.Seq.TypeConstructor;
 
 public interface ISeq :
     IMonad<ISeq>,
+    IScannable<ISeq>,
     ITraversable<ISeq>
 {
     static ITypeConstructor<ISeq, T>
@@ -25,6 +26,25 @@ public interface ISeq :
                     .Enumerable)
             .ToSeq();
 
+    static ITypeConstructor<ISeq, T2>
+        IScannable<ISeq>.ScanRight<T1, T2>(
+            ITypeConstructor<ISeq, T1> operand,
+            T2 init,
+            Func<T1, T2, T2> accumulator)
+        => operand
+            .ToSeq()
+            .Enumerable
+            .Select((_, i) => 
+                operand
+                    .ToSeq()
+                    .Take(i + 1))
+            .Select(ts => 
+                ts.ToSeq()
+                    .AggregateRight(
+                        init, 
+                        accumulator))
+            .ToSeq();
+    
     static T2 IFoldable<ISeq>.AggregateRight<T1, T2>(
         ITypeConstructor<ISeq, T1> operand,
         T2 init,
