@@ -26,6 +26,17 @@ public interface ISeq :
                     .Enumerable)
             .ToSeq();
 
+    static ITypeConstructor<ISeq, T3> IApplicative<ISeq>.Lift<T1, T2, T3>(
+        ITypeConstructor<ISeq, T1> left,
+        ITypeConstructor<ISeq, T2> right,
+        Func<T1, T2, T3> combinator)
+        => left
+            .ToSeq()
+            .Zip(
+                right.ToSeq(), 
+                combinator)
+            .ToSeq();
+    
     static ITypeConstructor<ISeq, T2>
         IScannable<ISeq>.ScanRight<T1, T2>(
             ITypeConstructor<ISeq, T1> operand,

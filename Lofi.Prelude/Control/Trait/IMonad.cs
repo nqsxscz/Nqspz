@@ -15,6 +15,14 @@ public interface IMonad<TC>
         where T1 : notnull
         where T2 : notnull;
     
+    static virtual ITypeConstructor<TC, T3> LiftM<T1, T2, T3>(
+        ITypeConstructor<TC, T1> left,
+        ITypeConstructor<TC, T2> right,
+        Func<T1, T2, T3> combinator)
+        => from t1 in left 
+           from t2 in right
+           select combinator(t1, t2);
+    
     static ITypeConstructor<TC, T2> IFunctor<TC>.Select<T1, T2>(
         ITypeConstructor<TC, T1> operand,
         Func<T1, T2> selector)
@@ -28,7 +36,8 @@ public interface IMonad<TC>
         ITypeConstructor<TC, T1> left,
         ITypeConstructor<TC, T2> right,
         Func<T1, T2, T3> combinator)
-        => from t1 in left 
-           from t2 in right
-           select combinator(t1, t2);
+        => TC.LiftM(
+            left, 
+            right, 
+            combinator);
 }
