@@ -5,5 +5,5 @@ namespace Lofi.Lang.Observable.Event.Set.Instance.Type;
 public interface ISequenceEventSet
     : IEventSet
 {
-    IEnumerable<IEvent> StoppingTimes { get; }
+    IEnumerable<IEvent> Events { get; }
 }

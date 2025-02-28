@@ -12,6 +12,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Trajectory", "Lofi.Lang.Stochastic.Trajectory\Lofi.Lang.Stochastic.Trajectory.csproj", "{E91E77A5-BCDE-4935-B569-A01C3F822E82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Observable.Event.Tests", "Lofi.Lang.Observable.Event.Tests\Lofi.Lang.Observable.Event.Tests.csproj", "{11A3DCDC-23DD-4C2D-A8A6-AD434C29DA9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Observable.EventSet.Tests", "Lofi.Lang.Observable.EventSet.Tests\Lofi.Lang.Observable.EventSet.Tests.csproj", "{886A13AF-1D91-4A88-964D-D57755CAF2D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Observable.Temporal.Tests", "Lofi.Lang.Observable.Temporal.Tests\Lofi.Lang.Observable.Temporal.Tests.csproj", "{98E5EFD9-85EB-496A-8AF2-88DB1A1964AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Process.Tests", "Lofi.Lang.Stochastic.Process.Tests\Lofi.Lang.Stochastic.Process.Tests.csproj", "{AB997854-30A7-4F81-9DD8-3C784392A203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Sample.Tests", "Lofi.Lang.Stochastic.Sample.Tests\Lofi.Lang.Stochastic.Sample.Tests.csproj", "{520050CC-EFEA-4F6F-B60B-EC3ACF1C34A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Trajectory.Tests", "Lofi.Lang.Stochastic.Trajectory.Tests\Lofi.Lang.Stochastic.Trajectory.Tests.csproj", "{5BCECC66-08D4-42CF-838A-3CACA2AE98E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +54,29 @@ Global
 		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E91E77A5-BCDE-4935-B569-A01C3F822E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A3DCDC-23DD-4C2D-A8A6-AD434C29DA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A3DCDC-23DD-4C2D-A8A6-AD434C29DA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A3DCDC-23DD-4C2D-A8A6-AD434C29DA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A3DCDC-23DD-4C2D-A8A6-AD434C29DA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{886A13AF-1D91-4A88-964D-D57755CAF2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{886A13AF-1D91-4A88-964D-D57755CAF2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{886A13AF-1D91-4A88-964D-D57755CAF2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{886A13AF-1D91-4A88-964D-D57755CAF2D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E5EFD9-85EB-496A-8AF2-88DB1A1964AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E5EFD9-85EB-496A-8AF2-88DB1A1964AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E5EFD9-85EB-496A-8AF2-88DB1A1964AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E5EFD9-85EB-496A-8AF2-88DB1A1964AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB997854-30A7-4F81-9DD8-3C784392A203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB997854-30A7-4F81-9DD8-3C784392A203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB997854-30A7-4F81-9DD8-3C784392A203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB997854-30A7-4F81-9DD8-3C784392A203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520050CC-EFEA-4F6F-B60B-EC3ACF1C34A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520050CC-EFEA-4F6F-B60B-EC3ACF1C34A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520050CC-EFEA-4F6F-B60B-EC3ACF1C34A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520050CC-EFEA-4F6F-B60B-EC3ACF1C34A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BCECC66-08D4-42CF-838A-3CACA2AE98E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BCECC66-08D4-42CF-838A-3CACA2AE98E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BCECC66-08D4-42CF-838A-3CACA2AE98E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BCECC66-08D4-42CF-838A-3CACA2AE98E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

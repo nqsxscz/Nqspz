@@ -9,8 +9,8 @@ namespace Lofi.Lang.Observable.Event.Set;
 public static partial class EventSet
 {
     public static IEventSet Of(
-        IEnumerable<IEvent> stoppingTimes)
-        => new SequenceEventSet(stoppingTimes);
+        IEnumerable<IEvent> events)
+        => new SequenceEventSet(events);
 
     public static IEventSet Of(
         IEnumerable<DateTime> dateTimes)

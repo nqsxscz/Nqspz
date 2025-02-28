@@ -74,7 +74,7 @@ public static partial class EventSet
                     .Order(),
             ISequenceEventSet
                 {
-                    StoppingTimes: var stoppingTimes
+                    Events: var stoppingTimes
                 } =>
                 stoppingTimes
                     .Select(Single.Event.Occurrence(t))
