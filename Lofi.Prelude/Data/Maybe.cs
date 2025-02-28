@@ -12,28 +12,22 @@ public static class Maybe
         where T : notnull
         => new Nothing<T>();
 
-    public static IMaybe<T> Of<T>(T value)
+    public static IMaybe<T> Of<T>(T t)
         where T : notnull
-        => new Just<T>(value);
+        => new Just<T>(t);
 
-    public static bool IsEmpty<T>(this IMaybe<T> maybe)
-        => maybe is INothing<T>;
-
-    public static bool IsNotEmpty<T>(this IMaybe<T> maybe)
-        => !maybe.IsEmpty();
-
+    public static IMaybe<T> ToMaybe<T>(this T t)
+        where T : notnull
+        => Of(t);
+    
     public static IMaybe<T> ToMaybe<T>(
         this ITypeConstructor<IMaybe, T> maybe)
         where T : notnull
-        => (IMaybe<T>)maybe;
-
-    public static IMaybe<T> ToMaybe<T>(this T value)
-        where T : notnull
-        => Of(value);
+        => (IMaybe<T>) maybe;
 
     public static IMaybe<T> OrElse<T>(
         this IMaybe<T> maybe,
-        Func<IMaybe<T>> f)
+        Func<IMaybe<T>> other)
         where T : notnull
         => maybe switch
         {
@@ -41,7 +35,7 @@ public static class Maybe
                 just.Value
                     .ToMaybe(),
             _ =>
-                f()
+                other()
         };
 
     public static IMaybe<T> OrElse<T>(
@@ -53,22 +47,28 @@ public static class Maybe
 
     public static T OrElse<T>(
         this IMaybe<T> maybe,
-        Func<T> f)
+        Func<T> @default)
         where T : notnull
         => maybe switch
         {
             IJust<T> just =>
                 just.Value,
             _ =>
-                f()
+                @default()
         };
 
     public static T OrElse<T>(
         this IMaybe<T> maybe,
-        T other)
+        T @default)
         where T : notnull
         => maybe.OrElse(
-            () => other);
+            () => @default);
+    
+    public static bool IsEmpty<T>(this IMaybe<T> maybe)
+        => maybe is INothing<T>;
+
+    public static bool IsNotEmpty<T>(this IMaybe<T> maybe)
+        => !maybe.IsEmpty();
 
     public static IEnumerable<T> ToEnumerable<T>(this IMaybe<T> maybe)
         => maybe

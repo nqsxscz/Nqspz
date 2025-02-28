@@ -11,8 +11,8 @@ public static partial class Event
             => stoppingTime
                 .Occurred(t);
 
-    public static bool Occurred(
-        this IEvent @event,
+    public static bool Occurred(this 
+        IEvent @event,
         DateTime t)
         => @event
             .Occurrence(t)

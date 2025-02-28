@@ -34,8 +34,8 @@ public interface IIdentity :
     static ITypeConstructor<TF, ITypeConstructor<IIdentity, T2>>
         ITraversable<IIdentity>.Traverse<TF, T1, T2>(
             ITypeConstructor<IIdentity, T1> operand,
-            Func<T1, ITypeConstructor<TF, T2>> f)
-        => f(operand
+            Func<T1, ITypeConstructor<TF, T2>> traverse)
+        => traverse(operand
                 .ToIdentity()
                 .Value)
             .Select(Data.Identity.Of);

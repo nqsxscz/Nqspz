@@ -16,8 +16,8 @@ public static partial class Event
             => stoppingTime
                 .Occurrence(t);
 
-    public static IMaybe<DateTime> Occurrence(
-        this IEvent @event,
+    public static IMaybe<DateTime> Occurrence(this 
+        IEvent @event,
         DateTime t)
         => @event switch 
         {

@@ -5,8 +5,8 @@ namespace Lofi.Lang.Observable.Event.Single;
 
 public static partial class Event
 {
-    public static IEvent Offset(
-        this IEvent operand,
+    public static IEvent Offset(this 
+        IEvent operand,
         TimeSpan offset)
         => new OffsetEvent(
             operand,

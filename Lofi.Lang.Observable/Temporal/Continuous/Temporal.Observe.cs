@@ -7,8 +7,8 @@ namespace Lofi.Lang.Observable.Temporal.Continuous;
 
 public static partial class Temporal
 {
-    public static IMaybe<T> Observe<T>(
-        this ITemporal<T> process, 
+    public static IMaybe<T> Observe<T>(this 
+        ITemporal<T> process, 
         DateTime t)
         where T : notnull
         => process

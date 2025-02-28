@@ -25,7 +25,7 @@ public interface IEulerMaruyamaSampler
         var dwt =
             process
                 .Wiener
-                .Differentiate()
+                .Differentiate(process.Converter)
                 .Sample(this, times, seed);
 
         var at =

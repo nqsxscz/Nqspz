@@ -55,8 +55,8 @@ public interface ITrajectory :
     static ITypeConstructor<TF, ITypeConstructor<ITrajectory, T2>>
         ITraversable<ITrajectory>.Traverse<TF, T1, T2>(
             ITypeConstructor<ITrajectory, T1> operand,
-            Func<T1, ITypeConstructor<TF, T2>> f)
+            Func<T1, ITypeConstructor<TF, T2>> traverse)
         => operand
             .ToTrajectory()
-            .Traverse(f);
+            .Traverse(traverse);
 }

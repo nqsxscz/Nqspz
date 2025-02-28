@@ -8,8 +8,8 @@ public interface ITraversable<TC>
 {
     static abstract ITypeConstructor<TF, ITypeConstructor<TC, T2>>
         Traverse<TF, T1, T2>(
-            ITypeConstructor<TC, T1> input,
-            Func<T1, ITypeConstructor<TF, T2>> f)
+            ITypeConstructor<TC, T1> operand,
+            Func<T1, ITypeConstructor<TF, T2>> traverse)
         where TF : IApplicative<TF>
         where T1 : notnull
         where T2 : notnull;

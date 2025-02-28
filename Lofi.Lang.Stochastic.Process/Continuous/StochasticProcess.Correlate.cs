@@ -7,23 +7,11 @@ namespace Lofi.Lang.Stochastic.Process.Continuous;
 public static partial class StochasticProcess
 {
     public static ICorrelatedWienerStochasticProcess<T>
-        Correlate<T>(
-            this IWienerStochasticProcess<T> wiener,
-            T correlation)
-        where T : IReal<T>
-        => wiener
-            .Correlate(
-                Wiener<T>(), 
-                correlation);
-
-    public static ICorrelatedWienerStochasticProcess<T>
-        Correlate<T>(
-            this IWienerStochasticProcess<T> wiener1,
-            IWienerStochasticProcess<T> wiener2,
+        Correlate<T>(this 
+            IWienerStochasticProcess<T> wiener,
             T correlation)
         where T : IReal<T>
         => new CorrelatedWienerStochasticProcess<T>(
-            wiener1, 
-            wiener2, 
+            wiener,
             correlation);
 }

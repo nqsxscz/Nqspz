@@ -6,8 +6,8 @@ namespace Lofi.Lang.Stochastic.Process.Continuous;
 
 public static partial class StochasticProcess
 {
-    public static IStochasticProcess<T> Multiply<T>(
-        this IStochasticProcess<T> left,
+    public static IStochasticProcess<T> Multiply<T>(this 
+        IStochasticProcess<T> left,
         IStochasticProcess<T> right)
         where T : IMultiplicativeSemigroup<T>
         => Lift(

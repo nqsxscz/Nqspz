@@ -9,8 +9,8 @@ namespace Lofi.Lang.Observable.Temporal.Discrete;
 
 public static partial class Temporal
 {
-    public static IDiscreteTemporal<T> Power<T, TNatural>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T, TNatural>(this 
+        IDiscreteTemporal<T> left,
         IDiscreteTemporal<TNatural> right)
         where T : IMultiplicativeGroup<T>
         where TNatural : INatural<TNatural>
@@ -19,8 +19,8 @@ public static partial class Temporal
             right, 
             Group.Power);
     
-    public static IDiscreteTemporal<T> Power<T, TNatural>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T, TNatural>(this 
+        IDiscreteTemporal<T> left,
         ITemporal<TNatural> right)
         where T : IMultiplicativeGroup<T>
         where TNatural : INatural<TNatural>
@@ -29,8 +29,8 @@ public static partial class Temporal
             right, 
             Group.Power);
     
-    public static IDiscreteTemporal<T> Power<T, TNatural>(
-        this ITemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T, TNatural>(this 
+        ITemporal<T> left,
         IDiscreteTemporal<TNatural> right)
         where T : IMultiplicativeGroup<T>
         where TNatural : INatural<TNatural>
@@ -39,8 +39,8 @@ public static partial class Temporal
             right, 
             Group.Power);
     
-    public static IDiscreteTemporal<T> Power<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T>(this 
+        IDiscreteTemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IReal<T>
         => Lift(
@@ -48,8 +48,8 @@ public static partial class Temporal
             right, 
             Real.Power);
     
-    public static IDiscreteTemporal<T> Power<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T>(this 
+        IDiscreteTemporal<T> left,
         ITemporal<T> right)
         where T : IReal<T>
         => Lift(
@@ -57,8 +57,8 @@ public static partial class Temporal
             right, 
             Real.Power);
     
-    public static IDiscreteTemporal<T> Power<T>(
-        this ITemporal<T> left,
+    public static IDiscreteTemporal<T> Power<T>(this 
+        ITemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IReal<T>
         => Lift(

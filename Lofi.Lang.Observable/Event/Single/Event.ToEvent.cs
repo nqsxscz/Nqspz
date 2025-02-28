@@ -9,8 +9,8 @@ public static partial class Event
         this DateTime dt)
         => Of(dt);
 
-    public static IEvent ToEvent(
-        this IDiscreteTemporal<bool> predicate,
+    public static IEvent ToEvent(this 
+        IDiscreteTemporal<bool> predicate,
         int index = 1)
         => Of(
             predicate,

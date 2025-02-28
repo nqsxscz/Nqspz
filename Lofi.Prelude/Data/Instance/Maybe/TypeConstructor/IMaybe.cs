@@ -11,13 +11,13 @@ public interface IMaybe :
 {
     static ITypeConstructor<IMaybe, T>
         IMonad<IMaybe>.Return<T>(T t)
-        => Data.Maybe.Nothing<T>();
+        => t.ToMaybe();
 
     static ITypeConstructor<IMaybe, T2>
         IMonad<IMaybe>.SelectMany<T1, T2>(
-            ITypeConstructor<IMaybe, T1> maybe,
+            ITypeConstructor<IMaybe, T1> operand,
             Func<T1, ITypeConstructor<IMaybe, T2>> selector)
-        => maybe switch
+        => operand switch
         {
             IJust<T1> { Value: var x } =>
                 selector(x),
@@ -26,26 +26,28 @@ public interface IMaybe :
         };
 
     static T2 IFoldable<IMaybe>.AggregateRight<T1, T2>(
-        ITypeConstructor<IMaybe, T1> maybe,
+        ITypeConstructor<IMaybe, T1> operand,
         T2 init,
-        Func<T1, T2, T2> f)
-        => maybe switch
+        Func<T1, T2, T2> accumulator)
+        => operand switch
         {
             IJust<T1> just =>
-                f(just.Value, init),
+                accumulator(just.Value, init),
             _ =>
                 init
         };
 
     static ITypeConstructor<TF, ITypeConstructor<IMaybe, T2>>
         ITraversable<IMaybe>.Traverse<TF, T1, T2>(
-            ITypeConstructor<IMaybe, T1> maybe,
-            Func<T1, ITypeConstructor<TF, T2>> f)
-        => maybe switch
+            ITypeConstructor<IMaybe, T1> operand,
+            Func<T1, ITypeConstructor<TF, T2>> traverse)
+        => operand switch
         {
             IJust<T1> { Value: var x } =>
-                f(x).Select(Data.Maybe.Of),
+                traverse(x)
+                    .Select(Data.Maybe.Of),
             _ =>
-                TF.Pure(Data.Maybe.Nothing<T2>())
+                TF.Pure(
+                    Data.Maybe.Nothing<T2>())
         };
 }

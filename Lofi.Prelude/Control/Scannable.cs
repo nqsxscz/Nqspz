@@ -304,8 +304,10 @@ public static class Scannable
         => operand.ScanRight(
             Maybe.Nothing<T>(),
             (t, p) => 
-                p.OrElse(t)
-                    .ToMaybe());
+                p.OrElse(
+                    predicate(t) ? 
+                        t.ToMaybe() 
+                        : Maybe.Nothing<T>()));
 
     public static IMaybe<ITypeConstructor<TC, T>> Where<TC, T>(
         this ITypeConstructor<TC, T> operand,

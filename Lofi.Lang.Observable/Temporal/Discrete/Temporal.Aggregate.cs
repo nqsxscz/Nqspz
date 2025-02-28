@@ -9,8 +9,8 @@ namespace Lofi.Lang.Observable.Temporal.Discrete;
 
 public static partial class Temporal
 {
-    public static IMaybe<T> Aggregate<T>(
-        this IDiscreteTemporal<T> operand,
+    public static IMaybe<T> Aggregate<T>(this 
+        IDiscreteTemporal<T> operand,
         DateTime t)
         where T : IMonoid<T>
         => operand
@@ -19,10 +19,11 @@ public static partial class Temporal
                 T.Combine, 
                 t);
 
-    public static Func<DateTime, IMaybe<T>> Aggregate<T>(
-        this IDiscreteTemporal<T> operand,
-        T init,
-        Func<T, T, T> accumulator)
+    public static Func<DateTime, IMaybe<T>> 
+        Aggregate<T>(this 
+            IDiscreteTemporal<T> operand,
+            T init,
+            Func<T, T, T> accumulator)
         where T : notnull
         => t
             => operand
@@ -31,8 +32,8 @@ public static partial class Temporal
                     accumulator, 
                     t);
     
-    public static IMaybe<T> Aggregate<T>(
-        this IDiscreteTemporal<T> operand,
+    public static IMaybe<T> Aggregate<T>(this 
+        IDiscreteTemporal<T> operand,
         T init,
         Func<T, T, T> accumulator,
         DateTime t)
@@ -43,10 +44,11 @@ public static partial class Temporal
                 accumulator,
                 t);
     
-    public static Func<DateTime, IMaybe<T2>> AggregateRight<T1, T2>(
-        this IDiscreteTemporal<T1> operand,
-        T2 init,
-        Func<T1, T2, T2> accumulator)
+    public static Func<DateTime, IMaybe<T2>> 
+        AggregateRight<T1, T2>(this 
+            IDiscreteTemporal<T1> operand,
+            T2 init,
+            Func<T1, T2, T2> accumulator)
         where T1 : notnull
         where T2 : notnull
         => t
@@ -56,11 +58,12 @@ public static partial class Temporal
                 accumulator, 
                 t);
     
-    public static IMaybe<T2> AggregateRight<T1, T2>(
-        this IDiscreteTemporal<T1> operand,
-        T2 init,
-        Func<T1, T2, T2> accumulator,
-        DateTime t)
+    public static IMaybe<T2> 
+        AggregateRight<T1, T2>(this 
+            IDiscreteTemporal<T1> operand,
+            T2 init,
+            Func<T1, T2, T2> accumulator,
+            DateTime t)
         where T1 : notnull
         where T2 : notnull
         => operand
@@ -69,10 +72,11 @@ public static partial class Temporal
                 accumulator.Flip(),
                 t);
     
-    public static Func<DateTime, IMaybe<T2>> AggregateLeft<T1, T2>(
-        this IDiscreteTemporal<T1> operand,
-        T2 init,
-        Func<T2, T1, T2> accumulator)
+    public static Func<DateTime, IMaybe<T2>> 
+        AggregateLeft<T1, T2>(this 
+            IDiscreteTemporal<T1> operand,
+            T2 init,
+            Func<T2, T1, T2> accumulator)
         where T1 : notnull
         where T2 : notnull
         => t
@@ -82,11 +86,12 @@ public static partial class Temporal
                 accumulator, 
                 t);
     
-    public static IMaybe<T2> AggregateLeft<T1, T2>(
-        this IDiscreteTemporal<T1> operand,
-        T2 init,
-        Func<T2, T1, T2> accumulator,
-        DateTime t)
+    public static IMaybe<T2> 
+        AggregateLeft<T1, T2>(this 
+            IDiscreteTemporal<T1> operand,
+            T2 init,
+            Func<T2, T1, T2> accumulator,
+            DateTime t)
         where T1 : notnull
         where T2 : notnull
         => operand

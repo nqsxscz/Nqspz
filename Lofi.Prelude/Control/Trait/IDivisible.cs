@@ -13,7 +13,7 @@ public interface IDivisible<TC>
         Divide<T1, T2, T3>(
             ITypeConstructor<TC, T2> left,
             ITypeConstructor<TC, T3> right,
-            Func<T1, (T2, T3)> f)
+            Func<T1, (T2, T3)> divider)
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull;

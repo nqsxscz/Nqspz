@@ -21,7 +21,7 @@ public static partial class StochasticProcess
             beta, 
             rho,
             converter,
-            Wiener<T>());
+            Wiener(converter));
     
     private static IStochasticProcess<T> Sabr<T>(
         T init1,

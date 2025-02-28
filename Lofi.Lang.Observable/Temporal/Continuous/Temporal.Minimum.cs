@@ -6,8 +6,8 @@ namespace Lofi.Lang.Observable.Temporal.Continuous;
 
 public static partial class Temporal
 {
-    public static ITemporal<T> Minimum<T>(
-        this ITemporal<T> left, 
+    public static ITemporal<T> Minimum<T>(this 
+        ITemporal<T> left, 
         ITemporal<T> right)
         where T : IOrderable<T>
         => Lift(

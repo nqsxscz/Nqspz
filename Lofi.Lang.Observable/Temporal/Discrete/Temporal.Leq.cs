@@ -7,8 +7,8 @@ namespace Lofi.Lang.Observable.Temporal.Discrete;
 
 public static partial class Temporal
 {
-    public static IDiscreteTemporal<bool> Leq<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<bool> Leq<T>(this 
+        IDiscreteTemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IOrderable<T>
         => Lift(
@@ -16,8 +16,8 @@ public static partial class Temporal
             right, 
             Orderable.Leq);
     
-    public static IDiscreteTemporal<bool> Leq<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<bool> Leq<T>(this 
+        IDiscreteTemporal<T> left,
         ITemporal<T> right)
         where T : IOrderable<T>
         => Lift(
@@ -25,8 +25,8 @@ public static partial class Temporal
             right, 
             Orderable.Leq);
     
-    public static IDiscreteTemporal<bool> Leq<T>(
-        this ITemporal<T> left,
+    public static IDiscreteTemporal<bool> Leq<T>(this 
+        ITemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IOrderable<T>
         => Lift(

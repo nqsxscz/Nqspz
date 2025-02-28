@@ -9,8 +9,8 @@ namespace Lofi.Lang.Stochastic.Sample;
 
 public static class Sampler
 {
-    public static ITrajectory<T> Sample<T>(
-        this IStochasticProcess<T> process,
+    public static ITrajectory<T> Sample<T>(this 
+        IStochasticProcess<T> process,
         ISampler sampler,
         ISeq<DateTime> times,
         int seed)

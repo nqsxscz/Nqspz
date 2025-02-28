@@ -13,19 +13,15 @@ public static class Seq
             .Empty<T>()
             .ToSeq();
 
-    public static ISeq<T> Of<T>(T item)
+    public static ISeq<T> Of<T>(T t)
         where T : notnull
         => Empty<T>()
-            .Append(item);
+            .Append(t);
 
-    public static ISeq<T> ToSeq<T>(
-        this ITypeConstructor<ISeq, T> list)
+    
+    public static ISeq<T> ToSeq<T>(this T t)
         where T : notnull
-        => (ISeq<T>)list;
-
-    public static ISeq<T> ToSeq<T>(this T item)
-        where T : notnull
-        => Of(item);
+        => Of(t);
 
     public static ISeq<T> ToSeq<T>(this IEnumerable<T> ts)
         where T : notnull
@@ -34,11 +30,16 @@ public static class Seq
             ISeq<T> seq => seq,
             _ => new Seq<T>(ts)
         };
+    
+    public static ISeq<T> ToSeq<T>(
+        this ITypeConstructor<ISeq, T> seq)
+        where T : notnull
+        => (ISeq<T>) seq;
 
     public static ISeq<T> Append<T>(
         this ISeq<T> seq,
-        T item)
+        T t)
         => seq.Enumerable
-            .Append(item)
+            .Append(t)
             .ToSeq();
 }

@@ -17,7 +17,7 @@ public static partial class StochasticProcess
             mu, 
             sigma, 
             converter, 
-            Wiener<T>());
+            Wiener(converter));
     
     private static IStochasticProcess<T> ArithmeticBrownianMotion<T>(
         T init,

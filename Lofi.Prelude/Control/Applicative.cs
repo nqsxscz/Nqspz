@@ -6,21 +6,23 @@ namespace Lofi.Prelude.Control;
 
 public static class Applicative
 {
-    public static ITypeConstructor<TC, T3> Lift<TC, T1, T2, T3>(
-        this ITypeConstructor<TC, T1> left,
-        ITypeConstructor<TC, T2> right,
-        Func<T1, T2, T3> combinator)
+    public static ITypeConstructor<TC, T3> 
+        Lift<TC, T1, T2, T3>(this 
+            ITypeConstructor<TC, T1> left,
+            ITypeConstructor<TC, T2> right,
+            Func<T1, T2, T3> combinator) 
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull
         => TC.Lift(left, right, combinator);
     
-    public static ITypeConstructor<TC, T4> Lift<TC, T1, T2, T3, T4>(
-        this ITypeConstructor<TC, T1> operand1,
-        ITypeConstructor<TC, T2> operand2,
-        ITypeConstructor<TC, T3> operand3,
-        Func<T1, T2, T3, T4> combinator)
+    public static ITypeConstructor<TC, T4> 
+        Lift<TC, T1, T2, T3, T4>(this 
+            ITypeConstructor<TC, T1> operand1,
+            ITypeConstructor<TC, T2> operand2,
+            ITypeConstructor<TC, T3> operand3,
+            Func<T1, T2, T3, T4> combinator)
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
@@ -32,12 +34,13 @@ public static class Applicative
                 combinator.Curry())
             .Apply(operand3);
     
-    public static ITypeConstructor<TC, T5> Lift<TC, T1, T2, T3, T4, T5>(
-        this ITypeConstructor<TC, T1> operand1,
-        ITypeConstructor<TC, T2> operand2,
-        ITypeConstructor<TC, T3> operand3,
-        ITypeConstructor<TC, T4> operand4,
-        Func<T1, T2, T3, T4, T5> combinator)
+    public static ITypeConstructor<TC, T5> 
+        Lift<TC, T1, T2, T3, T4, T5>(this 
+            ITypeConstructor<TC, T1> operand1,
+            ITypeConstructor<TC, T2> operand2,
+            ITypeConstructor<TC, T3> operand3,
+            ITypeConstructor<TC, T4> operand4,
+            Func<T1, T2, T3, T4, T5> combinator)
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
@@ -51,21 +54,23 @@ public static class Applicative
                 combinator.Curry())
             .Apply(operand4);
     
-    public static ITypeConstructor<TC, T2> Apply<TC, T1, T2>(
-        this ITypeConstructor<TC, Func<T1, T2>> f,
-        ITypeConstructor<TC, T1> input)
+    public static ITypeConstructor<TC, T2> 
+        Apply<TC, T1, T2>(this 
+            ITypeConstructor<TC, Func<T1, T2>> f,
+            ITypeConstructor<TC, T1> operand)
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
-        => f.Sequence()(input);
+        => f.Sequence()(operand);
     
-    public static ITypeConstructor<TC, T2> Apply<TC, T1, T2>(
-        this ITypeConstructor<TC, T1> input,
-        ITypeConstructor<TC, Func<T1, T2>> f)
+    public static ITypeConstructor<TC, T2> 
+        Apply<TC, T1, T2>(this 
+            ITypeConstructor<TC, T1> operand,
+            ITypeConstructor<TC, Func<T1, T2>> f)
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
-        => f.Apply(input);
+        => f.Apply(operand);
 
     public static Func<ITypeConstructor<TC, T1>, ITypeConstructor<TC, T2>>
         Sequence<TC, T1, T2>(
@@ -79,9 +84,10 @@ public static class Applicative
                 input,
                 (g, t1) => g(t1));
     
-    public static ITypeConstructor<TC, (T1, T2)> Zip<TC, T1, T2>(
-        this ITypeConstructor<TC, T1> left,
-        ITypeConstructor<TC, T2> right)
+    public static ITypeConstructor<TC, (T1, T2)> 
+        Zip<TC, T1, T2>(this 
+            ITypeConstructor<TC, T1> left,
+            ITypeConstructor<TC, T2> right)
         where TC : IApplicative<TC>
         where T1 : notnull
         where T2 : notnull
@@ -91,8 +97,8 @@ public static class Applicative
             Function.Tuple2);
     
     public static ITypeConstructor<TC, (T1, T2, T3)> 
-        Zip<TC, T1, T2, T3>(
-            this ITypeConstructor<TC, T1> operand1, 
+        Zip<TC, T1, T2, T3>(this 
+            ITypeConstructor<TC, T1> operand1, 
             ITypeConstructor<TC, T2> operand2,
             ITypeConstructor<TC, T3> operand3)
         where TC : IApplicative<TC>
@@ -106,8 +112,8 @@ public static class Applicative
             Function.Tuple3);
     
     public static ITypeConstructor<TC, (T1, T2, T3, T4)> 
-        Zip<TC, T1, T2, T3, T4>(
-            this ITypeConstructor<TC, T1> operand1, 
+        Zip<TC, T1, T2, T3, T4>(this 
+            ITypeConstructor<TC, T1> operand1, 
             ITypeConstructor<TC, T2> operand2,
             ITypeConstructor<TC, T3> operand3,
             ITypeConstructor<TC, T4> operand4)

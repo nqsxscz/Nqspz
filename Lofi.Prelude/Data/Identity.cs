@@ -8,17 +8,17 @@ namespace Lofi.Prelude.Data;
 public static class Identity
 {
     public static IIdentity<T> Of<T>(
-        T value)
+        T t)
         where T : notnull
-        => new Identity<T>(value);
+        => new Identity<T>(t);
     
     public static IIdentity<T> ToIdentity<T>(
-        this ITypeConstructor<IIdentity, T> maybe)
+        this T t)
         where T : notnull
-        => (IIdentity<T>)maybe;
-
+        => Of(t);
+    
     public static IIdentity<T> ToIdentity<T>(
-        this T value)
+        this ITypeConstructor<IIdentity, T> identity)
         where T : notnull
-        => Of(value);
+        => (IIdentity<T>)identity;
 }

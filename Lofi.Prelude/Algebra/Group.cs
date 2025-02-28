@@ -7,21 +7,21 @@ namespace Lofi.Prelude.Algebra;
 
 public static class Group
 {
-    public static T Invert<T>(this T value)
+    public static T Invert<T>(this T t)
         where T : IGroup<T>
-        => T.Invert(value);
+        => T.Invert(t);
     
-    public static T Negate<T>(this T value)
+    public static T Negate<T>(this T t)
         where T : IAdditiveGroup<T>
-        => -value;
+        => -t;
 
-    public static T Abs<T>(this T value)
+    public static T Abs<T>(this T t)
         where T :
         IAdditiveGroup<T>,
         IOrderable<T>
         => T.Maximum(
-            value, 
-            -value);
+            t, 
+            -t);
 
     public static T Subtract<T>(this T left, T right)
         where T : IAdditiveGroup<T>
@@ -36,17 +36,5 @@ public static class Group
         TNatural right)
         where T : IMultiplicativeGroup<T>
         where TNatural : INatural<TNatural>
-        => right >= TNatural.Zero ? 
-            left.Power1(right) 
-            : 
-            left.Power1(right)
-                .Invert();
-    
-    private static T Power1<T, TNatural>(
-        this T left, 
-        TNatural right)
-        where T : IMultiplicativeMonoid<T>
-        where TNatural : INatural<TNatural>
-        => right.Equals(TNatural.Zero) ? 
-            T.One : left * left.Power1(right - TNatural.One);
+        => T.Power(left, right);
 }

@@ -15,23 +15,26 @@ public static class Foldable
     public static T2 AggregateRight<TC, T1, T2>(
         this ITypeConstructor<TC, T1> operand,
         T2 init,
-        Func<T1, T2, T2> f)
+        Func<T1, T2, T2> accumulator)
         where TC : IFoldable<TC>
         where T1 : notnull
         where T2 : notnull
-        => TC.AggregateRight(operand, init, f);
+        => TC.AggregateRight(
+            operand, 
+            init, 
+            accumulator);
 
     public static T2 AggregateLeft<TC, T1, T2>(
         this ITypeConstructor<TC, T1> operand,
         T2 init,
-        Func<T2, T1, T2> f)
+        Func<T2, T1, T2> accumulator)
         where TC : IFoldable<TC>
         where T1 : notnull
         where T2 : notnull
         => TC.AggregateRight(
             operand,
             init,
-            f.Flip());
+            accumulator.Flip());
 
     public static T Aggregate<TC, T>(
         this ITypeConstructor<TC, T> operand)
@@ -41,16 +44,16 @@ public static class Foldable
             T.Identity,
             T.Combine);
 
-    public static TM AggregateMap<TC, TM, T>(
+    public static TM AggregateSelect<TC, TM, T>(
         this ITypeConstructor<TC, T> operand,
-        Func<T, TM> f)
+        Func<T, TM> selector)
         where TC : IFoldable<TC>
         where TM : IMonoid<TM>
         where T : notnull
         => operand.AggregateRight(
             TM.Identity,
             (t, m) =>
-                TM.Combine(f(t), m));
+                TM.Combine(selector(t), m));
 
     public static ISeq<T> Enumerate<TC, T>(
         this ITypeConstructor<TC, T> operand)
@@ -168,6 +171,8 @@ public static class Foldable
         => operand.AggregateRight(
             Maybe.Nothing<T>(),
             (t, p) => 
-                p.OrElse(t)
-                    .ToMaybe());
+                p.OrElse(
+                    predicate(t) ? 
+                        t.ToMaybe() 
+                        : Maybe.Nothing<T>()));
 }

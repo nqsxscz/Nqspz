@@ -21,7 +21,7 @@ public static partial class StochasticProcess
             sigma, 
             gamma, 
             converter, 
-            Wiener<T>());
+            Wiener(converter));
     
     private static IStochasticProcess<T> Ckls<T>(
         T init,

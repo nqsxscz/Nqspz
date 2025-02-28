@@ -7,8 +7,8 @@ namespace Lofi.Lang.Observable.Temporal.Discrete;
 
 public static partial class Temporal
 {
-    public static IDiscreteTemporal<T> Add<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Add<T>(this 
+        IDiscreteTemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IAdditiveSemigroup<T>
         => Lift(
@@ -16,8 +16,8 @@ public static partial class Temporal
             right, 
             Semigroup.Add);
     
-    public static IDiscreteTemporal<T> Add<T>(
-        this IDiscreteTemporal<T> left,
+    public static IDiscreteTemporal<T> Add<T>(this 
+        IDiscreteTemporal<T> left,
         ITemporal<T> right)
         where T : IAdditiveSemigroup<T>
         => Lift(
@@ -25,8 +25,8 @@ public static partial class Temporal
             right, 
             Semigroup.Add);
     
-    public static IDiscreteTemporal<T> Add<T>(
-        this ITemporal<T> left,
+    public static IDiscreteTemporal<T> Add<T>(this 
+        ITemporal<T> left,
         IDiscreteTemporal<T> right)
         where T : IAdditiveSemigroup<T>
         => Lift(

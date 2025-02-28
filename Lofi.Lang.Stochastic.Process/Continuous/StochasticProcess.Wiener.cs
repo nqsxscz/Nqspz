@@ -6,14 +6,22 @@ namespace Lofi.Lang.Stochastic.Process.Continuous;
 
 public static partial class StochasticProcess
 {
-    public static IWienerStochasticProcess<T> Wiener<T>()
+    public static IWienerStochasticProcess<T> 
+        Wiener<T>(
+            Func<TimeSpan, T> converter)
         where T : IReal<T>
-        => Wiener<T>(
+        => Wiener(
             Guid
                 .NewGuid()
-                .GetHashCode());
+                .GetHashCode(),
+            converter);
     
-    public static IWienerStochasticProcess<T> Wiener<T>(int id)
+    public static IWienerStochasticProcess<T> 
+        Wiener<T>(
+            int id, 
+            Func<TimeSpan, T> converter)
         where T : IReal<T>
-        => new StandardWienerStochasticProcess<T>(id);
+        => new StandardWienerStochasticProcess<T>(
+            id, 
+            converter);
 }

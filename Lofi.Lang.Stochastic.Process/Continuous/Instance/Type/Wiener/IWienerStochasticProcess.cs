@@ -4,4 +4,7 @@ namespace Lofi.Lang.Stochastic.Process.Continuous.Instance.Type.Wiener;
 
 public interface IWienerStochasticProcess<out T>
     : IStochasticProcess<T>
-    where T : IReal<T>;
+    where T : IReal<T>
+{
+    Func<TimeSpan, T> Converter { get; }
+}

@@ -6,8 +6,8 @@ namespace Lofi.Lang.Observable.Temporal.Continuous;
 
 public static partial class Temporal
 {
-    public static ITemporal<T> Multiply<T>(
-        this ITemporal<T> left, 
+    public static ITemporal<T> Multiply<T>(this 
+        ITemporal<T> left, 
         ITemporal<T> right)
         where T : IMultiplicativeSemigroup<T>
         => Lift(

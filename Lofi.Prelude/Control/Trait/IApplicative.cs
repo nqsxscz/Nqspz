@@ -12,7 +12,7 @@ public interface IApplicative<TC>
     static abstract ITypeConstructor<TC, T3> Lift<T1, T2, T3>(
         ITypeConstructor<TC, T1> left,
         ITypeConstructor<TC, T2> right,
-        Func<T1, T2, T3> selector)
+        Func<T1, T2, T3> combinator)
         where T1 : notnull
         where T2 : notnull
         where T3 : notnull;

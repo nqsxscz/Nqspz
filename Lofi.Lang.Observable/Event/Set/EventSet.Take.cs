@@ -5,8 +5,8 @@ namespace Lofi.Lang.Observable.Event.Set;
 
 public static partial class EventSet
 {
-    public static IEventSet Take(
-        this IEventSet operand,
+    public static IEventSet Take(this 
+        IEventSet operand,
         int count)
         => new TakeEventSet(
             operand,

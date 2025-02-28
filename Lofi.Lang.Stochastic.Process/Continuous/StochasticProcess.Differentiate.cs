@@ -9,24 +9,27 @@ namespace Lofi.Lang.Stochastic.Process.Continuous;
 
 public static partial class StochasticProcess
 {
-    public static IDifferentialStochasticProcess<T> Differentiate<T>(
-        this IStochasticProcess<DateTime> operand,
-        Func<TimeSpan, T> converter)
+    public static IDifferentialStochasticProcess<T> 
+        Differentiate<T>(this 
+            IStochasticProcess<DateTime> operand,
+            Func<TimeSpan, T> converter)
         where T : IAdditiveGroup<T>
         => new TimeDifferentialStochasticProcess<T>(
             operand, 
             converter);
 
-    public static IDifferentialStochasticProcess<T> Differentiate<T>(
-        this IWienerStochasticProcess<T> operand,
-        Func<TimeSpan, T> converter)
+    public static IDifferentialStochasticProcess<T> 
+        Differentiate<T>(this
+            IWienerStochasticProcess<T> operand, 
+            Func<TimeSpan, T> converter) 
         where T : IReal<T>
         => new WienerDifferentialStochasticProcess<T>(
             operand,
             converter);
     
-    public static IDifferentialStochasticProcess<T> Differentiate<T>(
-        this IStochasticProcess<T> operand)
+    public static IDifferentialStochasticProcess<T> 
+        Differentiate<T>(
+            this IStochasticProcess<T> operand)
         where T : IAdditiveGroup<T>
         => new GenericDifferentialStochasticProcess<T>(
             operand);

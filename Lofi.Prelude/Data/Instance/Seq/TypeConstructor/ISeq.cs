@@ -9,14 +9,14 @@ public interface ISeq :
     ITraversable<ISeq>
 {
     static ITypeConstructor<ISeq, T>
-        IMonad<ISeq>.Return<T>(T item)
-        => Data.Seq.Of(item);
+        IMonad<ISeq>.Return<T>(T t)
+        => t.ToSeq();
 
     static ITypeConstructor<ISeq, T2>
         IMonad<ISeq>.SelectMany<T1, T2>(
-            ITypeConstructor<ISeq, T1> seq,
+            ITypeConstructor<ISeq, T1> operand,
             Func<T1, ITypeConstructor<ISeq, T2>> selector)
-        => seq.ToSeq()
+        => operand.ToSeq()
             .Enumerable
             .SelectMany(t1 =>
                 selector(t1)
@@ -25,23 +25,23 @@ public interface ISeq :
             .ToSeq();
 
     static T2 IFoldable<ISeq>.AggregateRight<T1, T2>(
-        ITypeConstructor<ISeq, T1> seq,
+        ITypeConstructor<ISeq, T1> operand,
         T2 init,
-        Func<T1, T2, T2> aggregator)
-        => seq.ToSeq()
+        Func<T1, T2, T2> accumulator)
+        => operand.ToSeq()
             .Aggregate(
                 init,
-                aggregator.Flip());
+                accumulator.Flip());
 
     static ITypeConstructor<TF, ITypeConstructor<ISeq, T2>>
         ITraversable<ISeq>.Traverse<TF, T1, T2>(
-            ITypeConstructor<ISeq, T1> seq,
-            Func<T1, ITypeConstructor<TF, T2>> f)
-        => seq.AggregateRight(
+            ITypeConstructor<ISeq, T1> operand,
+            Func<T1, ITypeConstructor<TF, T2>> traverse)
+        => operand.AggregateRight(
             TF.Pure(Data.Seq.Empty<T2>()),
             (x, ys) =>
                 TF.Lift(
                     ys,
-                    f(x),
+                    traverse(x),
                     Data.Seq.Append));
 }

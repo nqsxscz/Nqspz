@@ -4,6 +4,7 @@ using Lofi.Prelude.Numeric.Trait;
 namespace Lofi.Lang.Stochastic.Process.Continuous.Instance.Implementation.Wiener;
 
 internal sealed record StandardWienerStochasticProcess<T>(
-    int Id)
+    int Id,
+    Func<TimeSpan, T> Converter)
     : IStandardWienerStochasticProcess<T>
     where T : IReal<T>;

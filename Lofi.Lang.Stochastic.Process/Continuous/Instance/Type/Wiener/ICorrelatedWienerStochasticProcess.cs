@@ -8,11 +8,12 @@ public interface ICorrelatedWienerStochasticProcess<out T>
     : IWienerStochasticProcess<T>
     where T : IReal<T>
 {
-    IWienerStochasticProcess<T> Left { get; }
-    
-    IWienerStochasticProcess<T> Right { get; }
+    IWienerStochasticProcess<T> Operand { get; }
     
     T Correlation { get; }
+
+    Func<TimeSpan, T> IWienerStochasticProcess<T>.Converter
+        => Operand.Converter;
     
     TResult IStochasticProcess<T>.Accept<TResult>(
         IStochasticProcessVisitor<TResult> visitor)

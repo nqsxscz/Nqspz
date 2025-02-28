@@ -43,7 +43,7 @@ public interface ISampler
         => Scannable
             .ScanLeft(
                 process
-                    .Differentiate()
+                    .Differentiate(process.Converter)
                     .Sample(
                         this, 
                         times, 
@@ -59,8 +59,10 @@ public interface ISampler
         where T : IReal<T>
         => StochasticProcess
             .Lift(
-                process.Left,
-                process.Right,
+                process.Operand,
+                StochasticProcess
+                    .Wiener(
+                        process.Converter),
                 (w1, w2) =>
                     process
                         .Correlation

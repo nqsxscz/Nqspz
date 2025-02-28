@@ -5,8 +5,8 @@ namespace Lofi.Lang.Observable.Event.Set;
 
 public static partial class EventSet
 {
-    public static IEventSet Intersect(
-        this IEventSet left,
+    public static IEventSet Intersect(this 
+        IEventSet left,
         IEventSet right)
         => new BinaryOperationEventSet(
                 left,

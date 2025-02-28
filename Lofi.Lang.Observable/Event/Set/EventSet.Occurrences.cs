@@ -8,8 +8,8 @@ namespace Lofi.Lang.Observable.Event.Set;
 public static partial class EventSet
 {
     public static IOrderedEnumerable<DateTime>
-        Occurrences(
-            this IEventSet sequence,
+        Occurrences(this 
+            IEventSet sequence,
             DateTime t)
         => sequence switch
         {
@@ -87,8 +87,8 @@ public static partial class EventSet
         };
 
     private static IOrderedEnumerable<DateTime>
-        Occurrences(
-            this IEventSet left,
+        Occurrences(this 
+            IEventSet left,
             IEventSet right,
             DateTime t,
             Func<DateTime, Func<DateTime, bool>> predicate)
@@ -106,8 +106,8 @@ public static partial class EventSet
     }
 
     private static IOrderedEnumerable<DateTime>
-        OccurrencesAfter(
-            this IEventSet left,
+        OccurrencesAfter(this 
+            IEventSet left,
             IEventSet right,
             DateTime t)
         => left.Occurrences(
@@ -118,8 +118,8 @@ public static partial class EventSet
                     s > first);
 
     private static IOrderedEnumerable<DateTime>
-        OccurrencesBefore(
-            this IEventSet left,
+        OccurrencesBefore(this 
+            IEventSet left,
             IEventSet right,
             DateTime t)
         => left.Occurrences(
