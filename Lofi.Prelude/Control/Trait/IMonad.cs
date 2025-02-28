@@ -31,13 +31,4 @@ public interface IMonad<TC>
 
     static ITypeConstructor<TC, T> IApplicative<TC>.Pure<T>(T t)
         => TC.Return(t);
-
-    static ITypeConstructor<TC, T3> IApplicative<TC>.Lift<T1, T2, T3>(
-        ITypeConstructor<TC, T1> left,
-        ITypeConstructor<TC, T2> right,
-        Func<T1, T2, T3> combinator)
-        => TC.LiftM(
-            left, 
-            right, 
-            combinator);
 }

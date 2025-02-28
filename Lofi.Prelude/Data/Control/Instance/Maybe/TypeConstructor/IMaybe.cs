@@ -24,6 +24,16 @@ public interface IMaybe :
             _ =>
                 Control.Maybe.Nothing<T2>()
         };
+    
+    static ITypeConstructor<IMaybe, T3>
+        IApplicative<IMaybe>.Lift<T1, T2, T3>(
+            ITypeConstructor<IMaybe, T1> left,
+            ITypeConstructor<IMaybe, T2> right,
+            Func<T1, T2, T3> combinator)
+        => left
+            .LiftM(
+                right, 
+                combinator);
 
     static T2 IFoldable<IMaybe>.AggregateRight<T1, T2>(
         ITypeConstructor<IMaybe, T1> operand,

@@ -20,6 +20,16 @@ public interface IIdentity :
             operand
                 .ToIdentity()
                 .Value);
+    
+    static ITypeConstructor<IIdentity, T3>
+        IApplicative<IIdentity>.Lift<T1, T2, T3>(
+            ITypeConstructor<IIdentity, T1> left,
+            ITypeConstructor<IIdentity, T2> right,
+            Func<T1, T2, T3> combinator)
+        => left
+            .LiftM(
+                right, 
+                combinator);
 
     static T2 IFoldable<IIdentity>.AggregateRight<T1, T2>(
         ITypeConstructor<IIdentity, T1> operand,
