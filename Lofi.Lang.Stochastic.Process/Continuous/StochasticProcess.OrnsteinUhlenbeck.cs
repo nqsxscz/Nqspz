@@ -18,7 +18,6 @@ public static partial class StochasticProcess
             theta, 
             mu, 
             sigma, 
-            converter, 
             Wiener(converter));
     
     private static IStochasticProcess<T> OrnsteinUhlenbeck<T>(
@@ -26,13 +25,11 @@ public static partial class StochasticProcess
         T theta,
         T mu,
         T sigma,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,
             s => theta * (mu - s), 
             _ => sigma, 
-            converter,
             wiener);
 }

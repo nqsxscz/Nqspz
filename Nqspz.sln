@@ -28,6 +28,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Prelude.Tests", "Lofi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Supplier.Tests", "Lofi.Supplier.Tests\Lofi.Supplier.Tests.csproj", "{CD78F682-DD38-4CB1-A01A-FDC424ECDD60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Expectation", "Lofi.Lang.Stochastic.Expectation\Lofi.Lang.Stochastic.Expectation.csproj", "{69A7C046-B42C-4D2E-B453-86EB8EB732E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Snell", "Lofi.Lang.Stochastic.Snell\Lofi.Lang.Stochastic.Snell.csproj", "{763C6E3A-1595-4DAC-9157-E01BBE3A4800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lofi.Lang.Stochastic.Expectation.Tests", "Lofi.Lang.Stochastic.Expectation.Tests\Lofi.Lang.Stochastic.Expectation.Tests.csproj", "{5E872646-01BD-46C6-A545-515DF8D22889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,5 +96,17 @@ Global
 		{CD78F682-DD38-4CB1-A01A-FDC424ECDD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD78F682-DD38-4CB1-A01A-FDC424ECDD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD78F682-DD38-4CB1-A01A-FDC424ECDD60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A7C046-B42C-4D2E-B453-86EB8EB732E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A7C046-B42C-4D2E-B453-86EB8EB732E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A7C046-B42C-4D2E-B453-86EB8EB732E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A7C046-B42C-4D2E-B453-86EB8EB732E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{763C6E3A-1595-4DAC-9157-E01BBE3A4800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763C6E3A-1595-4DAC-9157-E01BBE3A4800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763C6E3A-1595-4DAC-9157-E01BBE3A4800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763C6E3A-1595-4DAC-9157-E01BBE3A4800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E872646-01BD-46C6-A545-515DF8D22889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E872646-01BD-46C6-A545-515DF8D22889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E872646-01BD-46C6-A545-515DF8D22889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E872646-01BD-46C6-A545-515DF8D22889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

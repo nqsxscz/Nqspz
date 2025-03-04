@@ -5,7 +5,6 @@ using Lofi.Prelude.Numeric.Trait;
 namespace Lofi.Lang.Stochastic.Process.Continuous.Instance.Implementation.Differential;
 
 internal sealed record WienerDifferentialStochasticProcess<T>(
-    IWienerStochasticProcess<T> Operand,
-    Func<TimeSpan, T> Converter)
+    IWienerStochasticProcess<T> Operand)
     : IWienerDifferentialStochasticProcess<T>
     where T : IReal<T>;

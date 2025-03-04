@@ -20,12 +20,10 @@ public static partial class StochasticProcess
 
     public static IDifferentialStochasticProcess<T> 
         Differentiate<T>(this
-            IWienerStochasticProcess<T> operand, 
-            Func<TimeSpan, T> converter) 
+            IWienerStochasticProcess<T> operand) 
         where T : IReal<T>
         => new WienerDifferentialStochasticProcess<T>(
-            operand,
-            converter);
+            operand);
     
     public static IDifferentialStochasticProcess<T> 
         Differentiate<T>(

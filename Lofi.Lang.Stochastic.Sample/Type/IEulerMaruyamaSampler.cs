@@ -19,13 +19,13 @@ public interface IEulerMaruyamaSampler
         var dt = 
             StochasticProcess
                 .Time
-                .Differentiate(process.Converter)
+                .Differentiate(process.Wiener.Converter)
                 .Sample(this, times, seed);
         
         var dwt =
             process
                 .Wiener
-                .Differentiate(process.Converter)
+                .Differentiate()
                 .Sample(this, times, seed);
 
         var at =
@@ -46,7 +46,8 @@ public interface IEulerMaruyamaSampler
                 bt, 
                 process.Init, 
                 (su, du, dwu, au, bu) => 
-                    process.Drift(su, au) * du 
+                    su 
+                    + process.Drift(su, au) * du 
                     + process.Volatility(su, bu) * dwu)
             .ToTrajectory();
     }

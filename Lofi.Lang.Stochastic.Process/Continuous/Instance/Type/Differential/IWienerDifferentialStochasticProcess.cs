@@ -11,8 +11,6 @@ public interface IWienerDifferentialStochasticProcess<out T>
 {
     IWienerStochasticProcess<T> Operand { get; }
     
-    Func<TimeSpan, T> Converter { get; }
-    
     TResult IStochasticProcess<T>.Accept<TResult>(
         IStochasticProcessVisitor<TResult> visitor)
         => visitor.Visit(this);

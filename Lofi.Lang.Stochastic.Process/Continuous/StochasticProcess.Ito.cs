@@ -12,14 +12,12 @@ public static partial class StochasticProcess
         T init,
         Func<T, T> drift,
         Func<T, T> volatility,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
             drift, 
             (x, _) => volatility(x), 
-            converter,
             T.Zero.ToStochasticProcess(),
             wiener);
     
@@ -29,7 +27,6 @@ public static partial class StochasticProcess
         T init,
         Func<T, T, T> drift,
         Func<T, T> volatility,
-        Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
@@ -37,7 +34,6 @@ public static partial class StochasticProcess
             init, 
             drift, 
             (x, _) => volatility(x), 
-            converter,
             operand,
             T.Zero.ToStochasticProcess(),
             wiener);
@@ -47,15 +43,13 @@ public static partial class StochasticProcess
         T init,
         Func<T, T> drift,
         Func<T, T, T> volatility,
-        Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
             (x, _) => drift(x), 
-            volatility, 
-            converter, 
+            volatility,
             T.Zero.ToStochasticProcess(), 
             operand,
             wiener);
@@ -65,15 +59,13 @@ public static partial class StochasticProcess
         T init,
         Func<T, T, T> drift,
         Func<T, T, T> volatility,
-        Func<TimeSpan, T> converter,
         IStochasticProcess<T> operand,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init, 
             drift, 
-            volatility, 
-            converter, 
+            volatility,
             operand, 
             operand,
             wiener);
@@ -83,7 +75,6 @@ public static partial class StochasticProcess
         T init,
         Func<T, T, T> drift,
         Func<T, T, T> volatility,
-        Func<TimeSpan, T> converter,
         IStochasticProcess<T> left,
         IStochasticProcess<T> right,
         IWienerStochasticProcess<T> wiener)
@@ -92,7 +83,6 @@ public static partial class StochasticProcess
             init, 
             drift, 
             volatility,
-            converter, 
             left,
             right,
             wiener);

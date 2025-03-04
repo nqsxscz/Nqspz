@@ -5,6 +5,6 @@ namespace Lofi.Lang.Stochastic.Sample.Type;
 
 public interface IStandardNormalSampler
 {
-    ISeq<T> Sample<T>(int seed)
+    ISeq<T> Sample<T>(int seed, int count)
         where T : IReal<T>;
 }

@@ -7,6 +7,16 @@ namespace Lofi.Lang.Stochastic.Process.Continuous;
 public static partial class StochasticProcess
 {
     public static IWienerStochasticProcess<T> 
+        WienerAct365<T>(
+            int id)
+        where T : IReal<T>
+        => Wiener(
+            id,
+            dt => 
+                T.FromDouble(
+                    dt.TotalDays / 365));
+    
+    public static IWienerStochasticProcess<T> 
         Wiener<T>(
             Func<TimeSpan, T> converter)
         where T : IReal<T>

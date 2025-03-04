@@ -16,8 +16,6 @@ public interface IItoStochasticProcess<T>
     
     Func<T, T, T> Volatility { get; }
     
-    Func<TimeSpan, T> Converter { get; }
-    
     IStochasticProcess<T> Left { get; }
     
     IStochasticProcess<T> Right { get; }

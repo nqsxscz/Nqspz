@@ -16,20 +16,17 @@ public static partial class StochasticProcess
             init, 
             mu, 
             sigma, 
-            converter, 
             Wiener(converter));
     
-    private static IStochasticProcess<T> ArithmeticBrownianMotion<T>(
+    public static IStochasticProcess<T> ArithmeticBrownianMotion<T>(
         T init,
         T mu,
         T sigma,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,
             _ => mu, 
             _ => sigma, 
-            converter,
             wiener);
 }

@@ -1,4 +1,5 @@
 using Lofi.Prelude.Numeric.Trait;
+using MathNet.Numerics.Distributions;
 
 namespace Lofi.Prelude.Data.Numeric.Instance;
 
@@ -52,6 +53,13 @@ public readonly record struct RealNumber(double Value)
 
     public static RealNumber Atan(RealNumber operand)
         => FromDouble(double.Atan(operand.Value));
+    
+    public static RealNumber NormalCdf(RealNumber operand)
+        => FromDouble(
+            Normal.CDF(
+                0, 
+                1, 
+                operand.Value));
     
     public static RealNumber operator -(RealNumber operand)
         => FromDouble(-operand.Value);

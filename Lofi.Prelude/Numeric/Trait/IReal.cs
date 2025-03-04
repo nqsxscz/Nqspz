@@ -31,6 +31,8 @@ public interface IReal<T> :
     
     static abstract T Atan(T t);
     
+    static abstract T NormalCdf(T t);
+    
     static abstract T operator ^(
         T left, 
         T right);

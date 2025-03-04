@@ -43,7 +43,7 @@ public interface ISampler
         => Scannable
             .ScanLeft(
                 process
-                    .Differentiate(process.Converter)
+                    .Differentiate()
                     .Sample(
                         this, 
                         times, 
@@ -85,6 +85,7 @@ public interface ISampler
         where T : notnull
         => times
             .Select(_ => process.Value)
+            .Skip(1)
             .ToSeq()
             .ToTrajectory();
 
@@ -130,9 +131,18 @@ public interface ISampler
                 {
                     Id: var id
                 } =>
-                SampleStandard(id, process.Converter, times, seed),
+                SampleStandard(
+                    id, 
+                    process
+                        .Operand
+                        .Converter, 
+                    times, 
+                    seed),
             ICorrelatedWienerStochasticProcess<T> correlated =>
-                SampleCorrelated(correlated, times, seed),
+                SampleCorrelated(
+                    correlated, 
+                    times, 
+                    seed),
             _ => throw new InvalidOperationException()
         };
 
@@ -192,14 +202,11 @@ public interface ISampler
                 .Sample(this, times, seed), 
             StandardNormalSampler
                 .Sample<T>(
-                    HashCode
-                        .Combine(
-                            id, 
-                            seed))
+                    seed*100_000 + id, 
+                    times.Count()-1)
                 .ToTrajectory(), 
             (dt, z) => 
-                dt.Sqrt()
-                    .Multiply(z));
+                dt.Sqrt() * z);
 
     ITrajectory<T> SampleCorrelated<T>(
         ICorrelatedWienerStochasticProcess<T> process,

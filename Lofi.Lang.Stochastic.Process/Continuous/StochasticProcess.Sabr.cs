@@ -20,7 +20,6 @@ public static partial class StochasticProcess
             alpha, 
             beta, 
             rho,
-            converter,
             Wiener(converter));
     
     private static IStochasticProcess<T> Sabr<T>(
@@ -29,19 +28,16 @@ public static partial class StochasticProcess
         T alpha,
         T beta,
         T rho,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init1,
             _ => T.Zero,
             (f, sigma) => sigma * (f ^ beta),
-            converter,
             SabrVolatility( 
                 init2,
                 alpha, 
                 rho,
-                converter,
                 wiener),
             wiener);
     
@@ -49,13 +45,11 @@ public static partial class StochasticProcess
         T init,
         T alpha,
         T rho,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,
             _ => T.Zero,
             sigma => alpha * sigma,
-            converter,
             wiener.Correlate(rho));
 }

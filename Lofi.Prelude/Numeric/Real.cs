@@ -56,6 +56,10 @@ public static class Real
         where T : IReal<T>
         => T.Atan(t);
     
+    public static T NormalCdf<T>(this T t)
+        where T : IReal<T>
+        => T.NormalCdf(t);
+    
     public static T Power<T>(
         this T left, 
         T right)

@@ -22,13 +22,13 @@ public interface IRungeKuttaSampler
         var dt = 
             StochasticProcess
                 .Time
-                .Differentiate(process.Converter)
+                .Differentiate(process.Wiener.Converter)
                 .Sample(this, times, seed);
         
         var dwt =
             process
                 .Wiener
-                .Differentiate(process.Converter)
+                .Differentiate()
                 .Sample(this, times, seed);
 
         var at =
@@ -78,7 +78,7 @@ public interface IRungeKuttaSampler
             su
             + drift(su, au) * du
             + volatility(su, bu) * dwu
-            + T.Two.Reciprocate() * (drift(sbaru, au) - drift(su, au)) * (dwu.Square() - du) / du.Sqrt();
+            + T.Two.Invert() * (drift(sbaru, au) - drift(su, au)) * (dwu.Square() - du) / du.Sqrt();
         return next;
     }
 }

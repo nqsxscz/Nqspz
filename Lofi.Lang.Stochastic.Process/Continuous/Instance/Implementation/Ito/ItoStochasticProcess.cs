@@ -9,7 +9,6 @@ internal sealed record ItoStochasticProcess<T>(
     T Init,
     Func<T, T, T> Drift,
     Func<T, T, T> Volatility,
-    Func<TimeSpan, T> Converter,
     IStochasticProcess<T> Left,
     IStochasticProcess<T> Right,
     IWienerStochasticProcess<T> Wiener)

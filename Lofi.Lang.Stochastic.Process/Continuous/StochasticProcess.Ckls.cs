@@ -20,7 +20,6 @@ public static partial class StochasticProcess
             beta, 
             sigma, 
             gamma, 
-            converter, 
             Wiener(converter));
     
     private static IStochasticProcess<T> Ckls<T>(
@@ -29,13 +28,11 @@ public static partial class StochasticProcess
         T beta,
         T sigma,
         T gamma,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,
             s => alpha + beta * s, 
             s => sigma * (s^gamma), 
-            converter,
             wiener);
 }

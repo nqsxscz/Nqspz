@@ -18,7 +18,6 @@ public static partial class StochasticProcess
             mu, 
             sigma, 
             gamma, 
-            converter, 
             Wiener(converter));
     
     private static IStochasticProcess<T> Cev<T>(
@@ -26,13 +25,11 @@ public static partial class StochasticProcess
         T mu,
         T sigma,
         T gamma,
-        Func<TimeSpan, T> converter,
         IWienerStochasticProcess<T> wiener)
         where T : IReal<T>
         => Ito(
             init,
             s => mu * s, 
             s => sigma * (s^gamma), 
-            converter,
             wiener);
 }

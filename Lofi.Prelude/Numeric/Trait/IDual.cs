@@ -122,7 +122,7 @@ public interface IDual<T, TReal, TNumber> :
         var u = T.Real(t);
         var ups = T.Duals(t);
         var x = u.Sqrt();
-        var invDenominator = (TReal.Two*x).Reciprocate();
+        var invDenominator = (TReal.Two*x).Invert();
         var ys = ups
             .Select(up =>
                 up * invDenominator)
@@ -134,7 +134,7 @@ public interface IDual<T, TReal, TNumber> :
     {
         var u = T.Real(t);
         var ups = T.Duals(t);
-        var invDenominator = u.Reciprocate();
+        var invDenominator = u.Invert();
         var x = u.Log();
         var ys = ups
             .Select(up =>
@@ -188,7 +188,7 @@ public interface IDual<T, TReal, TNumber> :
         var invDenominator = 
             u.Cos()
                 .Square()
-                .Reciprocate();
+                .Invert();
         var x = u.Tan();
         var ys = ups
             .Select(up =>
@@ -204,7 +204,7 @@ public interface IDual<T, TReal, TNumber> :
         var invDenominator = 
             (TReal.One - u.Square())
             .Sqrt()
-            .Reciprocate();
+            .Invert();
         var x = u.Asin();
         var ys = ups
             .Select(up =>
@@ -220,7 +220,7 @@ public interface IDual<T, TReal, TNumber> :
         var invDenominator = 
             (TReal.One - u.Square())
             .Sqrt()
-            .Reciprocate();
+            .Invert();
         var x = u.Acos();
         var ys = ups
             .Select(up =>
@@ -235,11 +235,24 @@ public interface IDual<T, TReal, TNumber> :
         var ups = T.Duals(t);
         var invDenominator = 
             (TReal.One + u.Square())
-            .Reciprocate();
+            .Invert();
         var x = u.Atan();
         var ys = ups
             .Select(up =>
                 up * invDenominator)
+            .ToArray();
+        return T.Of(x, ys);
+    }
+    
+    static T IReal<T>.NormalCdf(T t)
+    {
+        var u = T.Real(t);
+        var ups = T.Duals(t);
+        var dN = (-u*u/TReal.Two).Exp() / (TReal.Two*TReal.Pi).Sqrt();
+        var x = u.NormalCdf();
+        var ys = ups
+            .Select(up =>
+                up * dN)
             .ToArray();
         return T.Of(x, ys);
     }
